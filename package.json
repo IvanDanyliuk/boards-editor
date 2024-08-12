@@ -6,6 +6,8 @@
     "start": "next start"
   },
   "dependencies": {
+    "@liveblocks/client": "^2.4.0",
+    "@liveblocks/react": "^2.4.0",
     "@supabase/ssr": "latest",
     "@supabase/supabase-js": "latest",
     "autoprefixer": "10.4.17",
