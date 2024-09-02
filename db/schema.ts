@@ -19,3 +19,9 @@ export const teams = pgTable('teams', {
   userIds: uuid('user_ids').notNull().references(() => users.id),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });
+
+export type InsertUser = typeof users.$inferInsert;
+export type SelectUser = typeof users.$inferSelect;
+
+export type InsertTeam = typeof teams.$inferInsert;
+export type SelectTeam = typeof teams.$inferSelect;
