@@ -10,8 +10,11 @@
     "migrate": "npx drizzle-kit generate && npx tsx db/migrate.ts"
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "@prisma/client": "^5.18.0",
     "@radix-ui/react-dialog": "^1.1.1",
+    "@radix-ui/react-label": "^2.1.0",
+    "@radix-ui/react-select": "^2.1.1",
     "@radix-ui/react-slot": "^1.1.0",
     "@supabase/ssr": "^0.5.0",
     "@supabase/supabase-js": "^2.45.1",
@@ -25,7 +28,8 @@
     "react-dom": "^18",
     "sonner": "^1.5.0",
     "tailwind-merge": "^2.5.2",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^20",
