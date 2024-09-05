@@ -16,7 +16,7 @@ const registerDataSchema = zod.object({
     .instanceof(File)
     .optional()
     .refine(file => !file || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
-    .refine(file => file && PROFILE_IMAGE_FILE_TYPES.includes(file?.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
+    .refine(file => file && file.size === 0 || file && PROFILE_IMAGE_FILE_TYPES.includes(file?.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
 }).refine(data => data.password === data.confirmPassword, {
   path: ['confirmPassword'],
   message: 'Passwords do not match',
