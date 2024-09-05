@@ -1,21 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import createBrowserClient from '@/lib/db/clients/browser';
 import { User } from '@supabase/supabase-js';
 
-export const UserMenu = () => {
-  const supabase = createBrowserClient();
 
-  const [userData, setUserData] = useState<User | null>(null);
+interface IUserMenu {
+  user: User | null;
+}
 
-  useEffect(() => {
-    supabase.auth.getUser().then(res => setUserData(res.data.user));
-  }, []);
-
+export const UserMenu = ({ user }: IUserMenu) => {
   return (
     <div>
-      {userData ? userData.email : 'Logged Out'}
+      {user ? user.email : 'Logged Out'}
     </div>
   );
 };

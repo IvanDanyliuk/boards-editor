@@ -111,3 +111,10 @@ export const register = async (prevState: any, formData: FormData) => {
     console.log('REGISTER', error);
   }
 };
+
+export const getCurrentUser = async () => {
+  const supabase = createServerClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if(user) return user;
+  return null;
+};
