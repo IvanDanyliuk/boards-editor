@@ -2,6 +2,9 @@
 
 import { z as zod } from 'zod';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
+import { createServerClient } from '../db/clients/server';
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 
 const registerDataSchema = zod.object({
@@ -23,25 +26,37 @@ const registerDataSchema = zod.object({
 });
 
 export const login = async (prevState: any, formData: FormData) => {
-  const email = formData.get('email');
-  const password = formData.get('password');
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
 
   try {
-    
+    const supabase = createServerClient()
+
+    // type-casting here for convenience
+    // in practice, you should validate your inputs
+
+    const { error } = await supabase.auth.signInWithPassword({ email, password })
+
+    if (error) {
+      redirect('/error')
+    }
+
+    revalidatePath('/', 'layout')
+    redirect('/')
   } catch (error: any) {
     
   }
 };
 
 export const register = async (prevState: any, formData: FormData) => {
-  const name = formData.get('name');
-  const email = formData.get('email');
-  const password = formData.get('password');
-  const confirmPassword = formData.get('confirmPassword');
+  const name = formData.get('name') as string;
+  const email = formData.get('email') as string;
+  const password = formData.get('password') as string;
+  const confirmPassword = formData.get('confirmPassword') as string;
   const imageUrl = formData.get('imageUrl');
-  const company = formData.get('company');
-  const industry = formData.get('industry');
-  const role = formData.get('role');
+  const company = formData.get('company') as string;
+  const industry = formData.get('industry') as string;
+  const role = formData.get('role') as string;
 
   try {
     console.log('REGISTER', {
@@ -65,7 +80,33 @@ export const register = async (prevState: any, formData: FormData) => {
       };
     };
 
-    console.log('FORM DATA CHECKED')
+    const supabase = createServerClient();
+
+    const { error } = await supabase.auth.signUp({
+      email: email as string,
+      password: password as string,
+      options: {
+        data: {
+          id: crypto.randomUUID(),
+          name,
+          imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fmr-bean-character--684406474624689742%2F&psig=AOvVaw0On74mmqOoaro_IXNnXp2z&ust=1725625054022000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKi8xrbkq4gDFQAAAAAdAAAAABAh',
+          company,
+          industry,
+          role,
+          createdAt: new Date().toISOString()
+        }
+      }
+    });
+
+    if(error) {
+      console.log('REGISTER ERROR!!!', error)
+      return {
+        error: [error.message]
+      }
+    }
+
+    revalidatePath('/', 'layout');
+    redirect('/');
   } catch (error: any) {
     console.log('REGISTER', error);
   }
