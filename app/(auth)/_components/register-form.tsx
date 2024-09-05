@@ -36,7 +36,7 @@ export const RegisterForm = () => {
 
   useEffect(() => {
     if(state && state.error) {
-      Object.values(state.error).forEach(error => toast(error, {
+      Object.values(state.error).forEach(error => toast(error.join('. '), {
         className: 'text-red-500',
         icon: <CircleAlert />
       }));
