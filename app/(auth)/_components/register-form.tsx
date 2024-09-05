@@ -59,11 +59,11 @@ export const RegisterForm = () => {
       </div>
       <div className='grid w-full items-center gap-1.5'>
         <Label htmlFor='password'>Password</Label>
-        <Input id='password' name='password' />
+        <Input id='password' name='password' type='password' />
       </div>
       <div className='grid w-full items-center gap-1.5'>
         <Label htmlFor='confirmPassword'>Confirm Password</Label>
-        <Input id='confirmPassword' name='confirmPassword' />
+        <Input id='confirmPassword' name='confirmPassword' type='password' />
       </div>
       <div className='grid w-full items-center gap-1.5'>
         <Label htmlFor='imageUrl'>Profile Image</Label>
@@ -103,7 +103,7 @@ export const RegisterForm = () => {
           </SelectContent>
         </Select>
       </div>
-      <Button variant='ghost' className='w-full'>Submit</Button>
+      <Button type='submit' variant='ghost' className='w-full'>Submit</Button>
     </form>
   );
 };
