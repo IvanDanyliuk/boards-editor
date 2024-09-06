@@ -7,6 +7,11 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 
+const loginDataSchema = zod.object({
+  email: zod.string().min(1, 'Email is required').email('Invalid email'),
+  password: zod.string().min(1, 'Password is required').min(6, 'Password must have 6 characters'),
+});
+
 const registerDataSchema = zod.object({
   name: zod.string().min(1, 'Name is required').max(100),
   email: zod.string().min(1, 'Email is required').email('Invalid email'),
@@ -29,8 +34,8 @@ export const login = async (prevState: any, formData: FormData) => {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
-  try {
-    const validatedFields = registerDataSchema.safeParse({
+  // try {
+    const validatedFields = loginDataSchema.safeParse({
       email, password
     });
 
@@ -40,22 +45,21 @@ export const login = async (prevState: any, formData: FormData) => {
       };
     };
 
-    const supabase = createServerClient()
-
-    // type-casting here for convenience
-    // in practice, you should validate your inputs
-
+    const supabase = createServerClient();
     const { error } = await supabase.auth.signInWithPassword({ email, password })
 
     if (error) {
-      redirect('/error')
+      redirect('/login');
     }
 
-    revalidatePath('/', 'layout')
-    redirect('/')
-  } catch (error: any) {
-    
-  }
+    revalidatePath('/', 'layout');
+    redirect('/');
+  // } catch (error: any) {
+  //   console.log('LOGIN ERROR', error)
+  //   return {
+  //     error: [error.message]
+  //   }
+  // }
 };
 
 export const register = async (prevState: any, formData: FormData) => {
@@ -68,7 +72,7 @@ export const register = async (prevState: any, formData: FormData) => {
   const industry = formData.get('industry') as string;
   const role = formData.get('role') as string;
 
-  try {
+  // try {
     const validatedFields = registerDataSchema.safeParse({
       name, email, password, confirmPassword, imageUrl, company, industry, role
     });
@@ -106,13 +110,13 @@ export const register = async (prevState: any, formData: FormData) => {
 
     revalidatePath('/', 'layout');
     redirect('/');
-  } catch (error: any) {
-    console.log('REGISTER', error);
-  }
+  // } catch (error: any) {
+  //   console.log('REGISTER', error);
+  // }
 };
 
 export const logout = async () => {
-  try {
+  // try {
     const supabase = createServerClient();
     const { error } = await supabase.auth.signOut();
 
@@ -122,11 +126,11 @@ export const logout = async () => {
       };
     }
 
-    revalidatePath('/', 'layout');
+    revalidatePath('/login', 'layout');
     redirect('/login')
-  } catch (error) {
+  // } catch (error) {
     
-  }
+  // }
 };
 
 export const getCurrentUser = async () => {

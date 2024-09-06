@@ -12,7 +12,7 @@ const RegisterPage = () => {
       </div>
       <div className='flex gap-1'>
         <p>Already have an account?</p> 
-        <Link href='login' className='font-semibold'>
+        <Link href='/login' className='font-semibold'>
           Sign In
         </Link>
       </div>
