@@ -20,7 +20,7 @@ const DashboardLayout = async ({ children }: IDashboardLayout) => {
     <main className='h-full'>
       <Sidebar />
       <div className='pl-[230px] flex-1 h-screen bg-page-bg'>
-        <div className='h-[80px] bg-amber-500'>
+        <div className='px-3 h-[80px] flex justify-between items-center bg-amber-500'>
           <div>Search</div>
           <UserMenu user={data.user} error={error} />
         </div>
