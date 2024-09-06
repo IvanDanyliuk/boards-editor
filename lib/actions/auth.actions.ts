@@ -123,7 +123,8 @@ export const logout = async () => {
 
 export const getCurrentUser = async () => {
   const supabase = createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (user) return user;
-  return null;
+  const { data, error } = await supabase.auth.getUser();
+  return {
+    data, error
+  };
 };
