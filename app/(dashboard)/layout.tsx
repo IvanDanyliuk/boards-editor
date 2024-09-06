@@ -10,6 +10,8 @@ interface IDashboardLayout  {
 const DashboardLayout = async ({ children }: IDashboardLayout) => {
   const user = await getCurrentUser();
 
+  console.log('USER', user)
+
   return (
     <main className='h-full'>
       <Sidebar />

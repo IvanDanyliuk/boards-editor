@@ -30,6 +30,16 @@ export const login = async (prevState: any, formData: FormData) => {
   const password = formData.get('password') as string;
 
   try {
+    const validatedFields = registerDataSchema.safeParse({
+      email, password
+    });
+
+    if(!validatedFields.success) {
+      return {
+        error: validatedFields.error.flatten().fieldErrors,
+      };
+    };
+
     const supabase = createServerClient()
 
     // type-casting here for convenience
@@ -59,17 +69,6 @@ export const register = async (prevState: any, formData: FormData) => {
   const role = formData.get('role') as string;
 
   try {
-    console.log('REGISTER', {
-      name,
-      email,
-      password,
-      confirmPassword,
-      imageUrl,
-      company,
-      industry,
-      role,
-    });
-    
     const validatedFields = registerDataSchema.safeParse({
       name, email, password, confirmPassword, imageUrl, company, industry, role
     });
@@ -89,7 +88,7 @@ export const register = async (prevState: any, formData: FormData) => {
         data: {
           id: crypto.randomUUID(),
           name,
-          imageUrl: 'https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pinterest.com%2Fpin%2Fmr-bean-character--684406474624689742%2F&psig=AOvVaw0On74mmqOoaro_IXNnXp2z&ust=1725625054022000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCKi8xrbkq4gDFQAAAAAdAAAAABAh',
+          imageUrl: 'https://kevinsharuk.wordpress.com/wp-content/uploads/2013/05/mrbean.jpg',
           company,
           industry,
           role,
