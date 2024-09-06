@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { redirect } from 'next/navigation';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -8,10 +7,9 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { CircleAlert, LogOut, Settings } from 'lucide-react';
-import { toast } from 'sonner';
+import { LogOut, Settings } from 'lucide-react';
 import { User } from '@supabase/supabase-js';
-import createBrowserClient from '@/lib/db/clients/browser';
+import { logout } from '@/lib/actions/auth.actions';
 
 
 interface IMenuDropdown {
@@ -19,19 +17,6 @@ interface IMenuDropdown {
 }
 
 export const MenuDropdown = ({ user }: IMenuDropdown) => {
-  const logout = async () => {
-    try {
-      const supabase = createBrowserClient();
-      await supabase.auth.signOut();
-      redirect('/login');
-    } catch (error: any) {
-      toast(error.message, {
-        className: 'text-red-500',
-        icon: <CircleAlert />
-      });
-    }
-  };
-
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -74,7 +59,7 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
             Settings
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className='font-medium text-base' onClick={logout}>
+        <DropdownMenuItem className='font-medium text-base' onClick={() => logout()}>
           <LogOut className='mr-3 w-5 h-5' />
           Log out
         </DropdownMenuItem>

@@ -1,10 +1,10 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 import { z as zod } from 'zod';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
 import { createServerClient } from '../db/clients/server';
-import { revalidatePath } from 'next/cache';
-import { redirect } from 'next/navigation';
 
 
 const loginDataSchema = zod.object({
@@ -34,32 +34,25 @@ export const login = async (prevState: any, formData: FormData) => {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
 
-  // try {
-    const validatedFields = loginDataSchema.safeParse({
-      email, password
-    });
+  const validatedFields = loginDataSchema.safeParse({
+    email, password
+  });
 
-    if(!validatedFields.success) {
-      return {
-        error: validatedFields.error.flatten().fieldErrors,
-      };
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
     };
+  };
 
-    const supabase = createServerClient();
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+  const supabase = createServerClient();
+  const { error } = await supabase.auth.signInWithPassword({ email, password })
 
-    if (error) {
-      redirect('/login');
-    }
+  if (error) {
+    redirect('/login');
+  }
 
-    revalidatePath('/', 'layout');
-    redirect('/');
-  // } catch (error: any) {
-  //   console.log('LOGIN ERROR', error)
-  //   return {
-  //     error: [error.message]
-  //   }
-  // }
+  revalidatePath('/', 'layout');
+  redirect('/');
 };
 
 export const register = async (prevState: any, formData: FormData) => {
@@ -72,47 +65,42 @@ export const register = async (prevState: any, formData: FormData) => {
   const industry = formData.get('industry') as string;
   const role = formData.get('role') as string;
 
-  // try {
-    const validatedFields = registerDataSchema.safeParse({
-      name, email, password, confirmPassword, imageUrl, company, industry, role
-    });
+  const validatedFields = registerDataSchema.safeParse({
+    name, email, password, confirmPassword, imageUrl, company, industry, role
+  });
 
-    if(!validatedFields.success) {
-      return {
-        error: validatedFields.error.flatten().fieldErrors,
-      };
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
     };
+  };
 
-    const supabase = createServerClient();
+  const supabase = createServerClient();
 
-    const { error } = await supabase.auth.signUp({
-      email: email as string,
-      password: password as string,
-      options: {
-        data: {
-          id: crypto.randomUUID(),
-          name,
-          imageUrl: 'https://kevinsharuk.wordpress.com/wp-content/uploads/2013/05/mrbean.jpg',
-          company,
-          industry,
-          role,
-          createdAt: new Date().toISOString()
-        }
-      }
-    });
-
-    if(error) {
-      console.log('REGISTER ERROR!!!', error)
-      return {
-        error: [error.message]
+  const { error } = await supabase.auth.signUp({
+    email: email as string,
+    password: password as string,
+    options: {
+      data: {
+        id: crypto.randomUUID(),
+        name,
+        imageUrl: 'https://kevinsharuk.wordpress.com/wp-content/uploads/2013/05/mrbean.jpg',
+        company,
+        industry,
+        role,
+        createdAt: new Date().toISOString()
       }
     }
+  });
 
-    revalidatePath('/', 'layout');
-    redirect('/');
-  // } catch (error: any) {
-  //   console.log('REGISTER', error);
-  // }
+  if (error) {
+    return {
+      error: [error.message],
+    };
+  }
+
+  revalidatePath('/', 'layout');
+  redirect('/');
 };
 
 export const logout = async () => {
@@ -120,7 +108,7 @@ export const logout = async () => {
     const supabase = createServerClient();
     const { error } = await supabase.auth.signOut();
 
-    if(error) {
+    if (error) {
       return {
         error: [error.message],
       };
@@ -136,6 +124,6 @@ export const logout = async () => {
 export const getCurrentUser = async () => {
   const supabase = createServerClient();
   const { data: { user } } = await supabase.auth.getUser();
-  if(user) return user;
+  if (user) return user;
   return null;
 };
