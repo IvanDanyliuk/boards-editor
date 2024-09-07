@@ -1,5 +1,6 @@
-import Link from "next/link";
-import { RegisterForm } from "../_components/register-form";
+import Link from 'next/link';
+import { RegisterForm } from '../_components/register-form';
+
 
 const RegisterPage = () => {
   return (

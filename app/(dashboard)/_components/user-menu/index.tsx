@@ -2,14 +2,15 @@
 
 import Link from 'next/link';
 import { User } from '@supabase/supabase-js';
-import { MenuDropdown } from './menu-dropdown';
 import { toast } from 'sonner';
+import { MenuDropdown } from './menu-dropdown';
 
 
 interface IUserMenu {
   user: User | null;
   error: any;
 }
+
 
 export const UserMenu = ({ user, error }: IUserMenu) => {
   if (error) {

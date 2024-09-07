@@ -1,5 +1,6 @@
-import Link from "next/link";
-import { LoginForm } from "../_components/login-form";
+import Link from 'next/link';
+import { LoginForm } from '../_components/login-form';
+
 
 const LoginPage = () => {
   return (
