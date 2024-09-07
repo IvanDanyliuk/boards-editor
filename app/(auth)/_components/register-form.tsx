@@ -32,11 +32,11 @@ const initialState = {
 
 export const RegisterForm = () => {
   const ref = useRef<HTMLFormElement>(null);
-  const [state, formAction] = useFormState(register, initialState);
+  const [state, formAction] = useFormState<any, any>(register, initialState);
 
   useEffect(() => {
     if(state && state.error) {
-      Object.values(state.error).forEach(error => toast(error.join('. '), {
+      Object.values(state.error).forEach((error: any) => toast(error.join('. '), {
         className: 'text-red-500',
         icon: <CircleAlert />
       }));

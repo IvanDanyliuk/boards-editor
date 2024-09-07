@@ -23,15 +23,14 @@ const initialState = {
 
 export const LoginForm = () => {
   const ref = useRef<HTMLFormElement>(null);
-  const [state, formAction] = useFormState(login, initialState);
+  const [state, formAction] = useFormState<any, any>(login, initialState);
 
   useEffect(() => {
     if(state && state.error) {
-      Object.values(state.error).forEach(error => toast(error.join('. '), {
+      Object.values(state.error).forEach((error: any) => toast(error.join('. '), {
         className: 'text-red-500',
         icon: <CircleAlert />
       }));
-      console.log('ERROR', state)
     }
   }, [state, formAction]);
 

@@ -20,7 +20,7 @@ interface IMenuDropdown {
 export const MenuDropdown = ({ user }: IMenuDropdown) => {
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger className='flex items-center'>
         <div>
           {user.user_metadata.imageUrl ? 
             <Image 
