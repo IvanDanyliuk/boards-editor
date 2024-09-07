@@ -1,13 +1,13 @@
 'use client';
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { login } from "@/lib/actions/auth.actions";
-import { CircleAlert } from "lucide-react";
-import { useEffect, useRef } from "react";
-import { useFormState } from "react-dom";
-import { toast } from "sonner";
+import { useEffect, useRef } from 'react';
+import { useFormState } from 'react-dom';
+import { CircleAlert } from 'lucide-react';
+import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { login } from '@/lib/actions/auth.actions';
 
 
 const initialState = {
@@ -31,6 +31,7 @@ export const LoginForm = () => {
         className: 'text-red-500',
         icon: <CircleAlert />
       }));
+      console.log('ERROR', state)
     }
   }, [state, formAction]);
 

@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { LogOut, Settings } from 'lucide-react';
+import { User } from '@supabase/supabase-js';
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,14 +9,13 @@ import {
   DropdownMenuLabel,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { LogOut, Settings } from 'lucide-react';
-import { User } from '@supabase/supabase-js';
 import { logout } from '@/lib/actions/auth.actions';
 
 
 interface IMenuDropdown {
   user: User;
 }
+
 
 export const MenuDropdown = ({ user }: IMenuDropdown) => {
   return (

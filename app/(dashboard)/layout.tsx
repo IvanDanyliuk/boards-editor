@@ -1,8 +1,8 @@
-import { getCurrentUser } from "@/lib/actions/auth.actions";
-import { Sidebar } from "./_components/sidebar";
-import { UserMenu } from "./_components/user-menu";
-import { toast } from "sonner";
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation';
+import { getCurrentUser } from '@/lib/actions/auth.actions';
+import { Sidebar } from './_components/sidebar';
+import { UserMenu } from './_components/user-menu';
+
 
 interface IDashboardLayout  {
   children: React.ReactNode;

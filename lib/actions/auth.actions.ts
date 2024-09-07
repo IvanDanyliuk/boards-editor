@@ -48,7 +48,11 @@ export const login = async (prevState: any, formData: FormData) => {
   const { error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
-    redirect('/login');
+    return {
+      error: {
+        credentials: [error?.message!],
+      },
+    }
   }
 
   revalidatePath('/', 'layout');
@@ -95,7 +99,9 @@ export const register = async (prevState: any, formData: FormData) => {
 
   if (error) {
     return {
-      error: [error.message],
+      error: {
+        register: [error.message],
+      },
     };
   }
 
@@ -110,7 +116,9 @@ export const logout = async () => {
 
     if (error) {
       return {
-        error: [error.message],
+        error: {
+          logout: [error.message],
+        },
       };
     }
 
