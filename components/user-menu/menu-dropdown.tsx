@@ -14,7 +14,7 @@ import { logout } from '@/lib/actions/auth.actions';
 
 interface IMenuDropdown {
   user: User;
-}
+};
 
 
 export const MenuDropdown = ({ user }: IMenuDropdown) => {

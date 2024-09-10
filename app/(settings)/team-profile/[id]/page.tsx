@@ -1,4 +1,4 @@
-const TeamSettingsPage = ({ 
+const TeamProfilePage = ({ 
   params: { id } 
 }: { 
   params: {
@@ -12,4 +12,4 @@ const TeamSettingsPage = ({
   );
 };
 
-export default TeamSettingsPage;
+export default TeamProfilePage;

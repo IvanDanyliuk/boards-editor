@@ -3,6 +3,7 @@ import { getCurrentUser } from "@/lib/actions/auth.actions";
 import { LayoutGrid } from "lucide-react";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { SettingsMenu } from "./_components/settings-menu";
 
 interface ISettingsLayout {
   children: React.ReactNode;
@@ -29,11 +30,9 @@ const SettingsLayout = async ({ children }: ISettingsLayout) => {
         />
       </header>
       <div className='h-[calc(100vh-80px)] bg-page-bg'>
-        <div className='container py-3 flex gap-3'>
-          <div>
-            Settings Sidebar
-          </div>
-          <div>
+        <div className='container py-3 h-full flex gap-3'>
+          <SettingsMenu userId={data.user.id} />
+          <div className='p-3  flex-1 rounded-md bg-white'>
             {children}
           </div>
         </div>
