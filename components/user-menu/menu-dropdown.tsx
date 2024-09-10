@@ -55,7 +55,7 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuItem>
-          <Link href={`/settings/${user.id}`} className='flex items-center font-medium text-base'>
+          <Link href={`/profile/${user.id}`} className='flex items-center font-medium text-base'>
             <Settings className='mr-3 w-5 h-5' />
             Settings
           </Link>
