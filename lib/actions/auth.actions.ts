@@ -3,8 +3,8 @@
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 import { z as zod } from 'zod';
-import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
 import { createServerClient } from '../db/clients/server';
+import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
 
 
 const loginDataSchema = zod.object({
@@ -110,23 +110,19 @@ export const register = async (prevState: any, formData: FormData) => {
 };
 
 export const logout = async () => {
-  // try {
-    const supabase = createServerClient();
-    const { error } = await supabase.auth.signOut();
+  const supabase = createServerClient();
+  const { error } = await supabase.auth.signOut();
 
-    if (error) {
-      return {
-        error: {
-          logout: [error.message],
-        },
-      };
-    }
+  if (error) {
+    return {
+      error: {
+        logout: [error.message],
+      },
+    };
+  }
 
-    revalidatePath('/login', 'layout');
-    redirect('/login')
-  // } catch (error) {
-    
-  // }
+  revalidatePath('/login', 'layout');
+  redirect('/login');
 };
 
 export const getCurrentUser = async () => {
