@@ -1,9 +1,9 @@
-import { UserMenu } from "@/components/user-menu";
-import { getCurrentUser } from "@/lib/actions/auth.actions";
-import { LayoutGrid } from "lucide-react";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { SettingsMenu } from "./_components/settings-menu";
+import { UserMenu } from '@/components/user-menu';
+import { getCurrentUser } from '@/lib/actions/auth.actions';
+import { LayoutGrid } from 'lucide-react';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { SettingsMenu } from './_components/settings-menu';
 
 interface ISettingsLayout {
   children: React.ReactNode;
