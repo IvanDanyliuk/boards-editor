@@ -15,7 +15,7 @@ export const SettingsMenu = ({ userId }: ISettingsMenu) => {
       label: 'Profile settings',
     },
     {
-      href: `/profile/${userId}/team`,
+      href: `/profile/${userId}/team-profile`,
       icon: <PanelsLeftBottom />,
       label: 'Team profile',
     },

@@ -7,7 +7,7 @@ const TeamProfilePage = ({
 }) => {
   return (
     <div>
-      {id}
+      Team{id}
     </div>
   );
 };
