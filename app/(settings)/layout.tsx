@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { LayoutGrid } from 'lucide-react';
 import { UserMenu } from '@/components/user-menu';
-import { getCurrentUser } from '@/lib/actions/auth.actions';
+import { getCurrentUser } from '@/lib/actions/user.actions';
 import { SettingsMenu } from './_components/settings-menu';
 
 
