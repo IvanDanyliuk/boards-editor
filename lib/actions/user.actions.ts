@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { z as zod } from 'zod';
+import db from '../db';
 import { createServerClient } from '../db/clients/server';
 
 
@@ -39,4 +40,22 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
 
   const supabase = createServerClient();
   
+  const { error } = await supabase.auth.updateUser({
+    data: {
+      name, 
+      company, 
+      industry, 
+      role,
+    }
+  });
+
+  if (error) {
+    return {
+      error: {
+        register: [error.message],
+      },
+    };
+  }
+
+  revalidatePath('/', 'layout');
 };
