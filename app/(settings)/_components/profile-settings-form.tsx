@@ -16,13 +16,6 @@ interface IProfileSettingsForm {
   role: string;
 }
 
-const emptyState = {
-  name: '',
-  company: '',
-  industry: '',
-  role: ''
-}
-
 
 export const ProfileSettingsForm = ({
   name,

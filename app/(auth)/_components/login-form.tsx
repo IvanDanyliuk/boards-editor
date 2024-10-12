@@ -5,9 +5,8 @@ import { useFormState } from 'react-dom';
 import { CircleAlert } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { login } from '@/lib/actions/auth.actions';
+import { TextField } from '@/components/inputs/TextField';
 
 
 const initialState = {
@@ -20,6 +19,7 @@ const initialState = {
   company: '',
   industry: '',
 };
+
 
 export const LoginForm = () => {
   const ref = useRef<HTMLFormElement>(null);
@@ -40,15 +40,22 @@ export const LoginForm = () => {
       action={formAction} 
       className='p-3 w-full max-w-[500px] flex flex-col justify-center items-center gap-4'
     >
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='email'>Email</Label>
-        <Input id='email' name='email' />
-      </div>
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='password'>Password</Label>
-        <Input id='password' name='password' type='password' />
-      </div>
-      <Button type='submit' variant='ghost' className='w-full'>Submit</Button>
+      <TextField 
+        name='email' 
+        label='Email' 
+      />
+      <TextField 
+        name='password' 
+        label='Password' 
+        type='password' 
+      />
+      <Button 
+        type='submit' 
+        variant='ghost' 
+        className='w-full'
+      >
+        Submit
+      </Button>
     </form>
   );
 };

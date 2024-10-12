@@ -7,13 +7,6 @@ import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select';
 import { register } from '@/lib/actions/auth.actions';
 import { INDUSTRIES, ROLES } from '@/lib/constants';
 import { TextField } from '@/components/inputs/TextField';
@@ -51,15 +44,32 @@ export const RegisterForm = () => {
       action={formAction} 
       className='p-3 w-full max-w-[500px] flex flex-col justify-center items-center gap-4'
     >
-      <TextField name='name' label='Name' />
-      <TextField name='email' label='Email' />
-      <TextField name='password' label='Password' type='password' />
-      <TextField name='confirmPassword' label='Confirm Password' type='password' />
+      <TextField 
+        name='name' 
+        label='Name' 
+      />
+      <TextField 
+        name='email' 
+        label='Email' 
+      />
+      <TextField 
+        name='password' 
+        label='Password' 
+        type='password' 
+      />
+      <TextField 
+        name='confirmPassword' 
+        label='Confirm Password' 
+        type='password' 
+      />
       <div className='grid w-full items-center gap-1.5'>
         <Label htmlFor='imageUrl'>Profile Image</Label>
         <Input id='imageUrl' name='imageUrl' type='file' />
       </div>
-      <TextField name='company' label='Company' />
+      <TextField 
+        name='company' 
+        label='Company' 
+      />
       <SelectField 
         name='industry'
         label='Industry'
@@ -72,7 +82,13 @@ export const RegisterForm = () => {
         placeholder='Select a role'
         options={ROLES}
       />
-      <Button type='submit' variant='ghost' className='w-full'>Submit</Button>
+      <Button 
+        type='submit' 
+        variant='ghost' 
+        className='w-full'
+      >
+        Submit
+      </Button>
     </form>
   );
 };
