@@ -1,149 +1,149 @@
 export const INDUSTRIES = [
   {
-    id: crypto.randomUUID(),
+    id: 'industry_1_architectural_and_engineering_services',
     name: 'Architectural & Engineering services',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_2_asset_management',
     name: 'Asset management',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_3_banking',
     name: 'Banking',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_4_educational_services',
     name: 'Educational services',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_5_graphic_and_web_design_services',
     name: 'Graphic & Web Design services',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_6_health_care',
     name: 'Health Care',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_7_insurance',
     name: 'Insurance',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_8_it_consulting',
     name: 'IT Consulting',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_9_manufacturing',
     name: 'Manufacturing',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_10_marketing_and_advertising',
     name: 'Marketing & Advertising',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_11_pharmaceuticals_biotechnology_and_life_sciences',
     name: 'Pharmaceuticals, Biotechnology & Life Sciences',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_12_public_administration',
     name: 'Public Administration',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_13_publishing',
     name: 'Publishing',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_14_real_estate',
     name: 'Real Estate',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_15_software_development',
     name: 'Software Development',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_16_technology_distributors',
     name: 'Technology Distributors',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_17_technology_hardware_and_equipment',
     name: 'Technology Hardware & Equipment',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_18_telecommunication_services',
     name: 'Telecommunication Services',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_19_transportation',
     name: 'Transportation',
   },
   {
-    id: crypto.randomUUID(),
+    id: 'industry_20_others',
     name: 'Others',
   },
 ];
 
 export const ROLES = [
   {
-    id: crypto.randomUUID(),
+    id: 'role_1_project_management',
     name: 'Project Management'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_2_product_management',
     name: 'Product Management'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_3_engineering_development',
     name: 'Engineering / Development'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_4_agile_coach_scrum_master',
     name: 'Agile Coach / Scrum Master'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_5_ux_research',
     name: 'UX Research'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_6_design',
     name: 'Design'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_7_marketing',
     name: 'Marketing'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_8_operations',
     name: 'Operations'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_9_sales_success',
     name: 'Sales / Success'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_10_customer_support',
     name: 'Customer Support'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_11_analytics_data_science',
     name: 'Analytics / Data Science'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_12_it_services',
     name: 'IT Services'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_13_hr_people',
     name: 'HR / People'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_14_legal_finance',
     name: 'Legal / Finance'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_15_teacher_student',
     name: 'Teacher / Student'
   },
   {
-    id: crypto.randomUUID(),
+    id: 'role_16_others',
     name: 'Others'
   },
 ];

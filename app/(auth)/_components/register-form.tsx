@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/select';
 import { register } from '@/lib/actions/auth.actions';
 import { INDUSTRIES, ROLES } from '@/lib/constants';
+import { TextField } from '@/components/inputs/TextField';
 
 
 const initialState = {
@@ -49,30 +50,15 @@ export const RegisterForm = () => {
       action={formAction} 
       className='p-3 w-full max-w-[500px] flex flex-col justify-center items-center gap-4'
     >
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='name'>Name</Label>
-        <Input id='name' name='name' />
-      </div>
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='email'>Email</Label>
-        <Input id='email' name='email' />
-      </div>
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='password'>Password</Label>
-        <Input id='password' name='password' type='password' />
-      </div>
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='confirmPassword'>Confirm Password</Label>
-        <Input id='confirmPassword' name='confirmPassword' type='password' />
-      </div>
+      <TextField name='name' label='Name' />
+      <TextField name='email' label='Email' />
+      <TextField name='password' label='Password' type='password' />
+      <TextField name='confirmPassword' label='Confirm Password' type='password' />
       <div className='grid w-full items-center gap-1.5'>
         <Label htmlFor='imageUrl'>Profile Image</Label>
         <Input id='imageUrl' name='imageUrl' type='file' />
       </div>
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='company'>Company</Label>
-        <Input id='company' name='company' />
-      </div>
+      <TextField name='company' label='Company' />
       <div className='grid w-full items-center gap-1.5'>
         <Label htmlFor='industry'>Industry</Label>
         <Select name='industry'>

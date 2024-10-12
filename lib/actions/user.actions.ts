@@ -17,6 +17,9 @@ const userDataSchema = zod.object({
 export const getCurrentUser = async () => {
   const supabase = createServerClient();
   const { data, error } = await supabase.auth.getUser();
+
+  console.log('GET CURRENT USER', data.user)
+
   return {
     data, error
   };
