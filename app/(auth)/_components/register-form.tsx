@@ -17,6 +17,7 @@ import {
 import { register } from '@/lib/actions/auth.actions';
 import { INDUSTRIES, ROLES } from '@/lib/constants';
 import { TextField } from '@/components/inputs/TextField';
+import { SelectField } from '@/components/inputs/SelectField';
 
 
 const initialState = {
@@ -59,36 +60,18 @@ export const RegisterForm = () => {
         <Input id='imageUrl' name='imageUrl' type='file' />
       </div>
       <TextField name='company' label='Company' />
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='industry'>Industry</Label>
-        <Select name='industry'>
-          <SelectTrigger>
-            <SelectValue placeholder='Select an industry' />
-          </SelectTrigger>
-          <SelectContent>
-            {INDUSTRIES.map(industry => (
-              <SelectItem key={crypto.randomUUID()} value={industry.id}>
-                {industry.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='role'>Role</Label>
-        <Select name='role'>
-          <SelectTrigger>
-            <SelectValue placeholder='Select a role' />
-          </SelectTrigger>
-          <SelectContent>
-            {ROLES.map(role => (
-              <SelectItem key={crypto.randomUUID()} value={role.id}>
-                {role.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      <SelectField 
+        name='industry'
+        label='Industry'
+        placeholder='Select an industry'
+        options={INDUSTRIES}
+      />
+      <SelectField 
+        name='role'
+        label='Role'
+        placeholder='Select a role'
+        options={ROLES}
+      />
       <Button type='submit' variant='ghost' className='w-full'>Submit</Button>
     </form>
   );
