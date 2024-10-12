@@ -14,7 +14,7 @@ interface IProfileSettingsForm {
   company: string;
   industry: string;
   role: string;
-}
+};
 
 
 export const ProfileSettingsForm = ({
@@ -59,7 +59,12 @@ export const ProfileSettingsForm = ({
         defaultValue={role} 
         options={ROLES} 
       />
-      <Button type='submit' className='w-full md:w-52'>Submit</Button>
+      <Button 
+        type='submit' 
+        className='w-full md:w-52'
+      >
+        Submit
+      </Button>
     </form>
   );
 };

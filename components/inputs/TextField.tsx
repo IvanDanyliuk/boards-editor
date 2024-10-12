@@ -9,7 +9,7 @@ interface ITextField {
   value?: string;
   defaultValue?: string;
   onChange?: () => void;
-}
+};
 
 
 export const TextField = ({

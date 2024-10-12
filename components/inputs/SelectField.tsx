@@ -18,7 +18,7 @@ interface ISelectField {
   placeholder?: string;
   value?: string;
   defaultValue?: string;
-}
+};
 
 
 export const SelectField = ({
@@ -31,21 +31,31 @@ export const SelectField = ({
 }: ISelectField) => {
   return (
     <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor={name}>
-          {label}
-        </Label>
-        <Select name={name} value={value} defaultValue={defaultValue}>
-          <SelectTrigger>
-            <SelectValue placeholder={placeholder} defaultValue={defaultValue} />
-          </SelectTrigger>
-          <SelectContent>
-            {options.map(option => (
-              <SelectItem key={crypto.randomUUID()} value={option.id}>
-                {option.name}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
-      </div>
+      <Label htmlFor={name}>
+        {label}
+      </Label>
+      <Select 
+        name={name} 
+        value={value} 
+        defaultValue={defaultValue}
+      >
+        <SelectTrigger>
+          <SelectValue 
+            placeholder={placeholder} 
+            defaultValue={defaultValue} 
+          />
+        </SelectTrigger>
+        <SelectContent>
+          {options.map(option => (
+            <SelectItem 
+              key={crypto.randomUUID()} 
+              value={option.id}
+            >
+              {option.name}
+            </SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
+    </div>
   );
 };
