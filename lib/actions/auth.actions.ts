@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation';
 import { z as zod } from 'zod';
 import { createServerClient } from '../db/clients/server';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
+import { getRandomHexColor } from '../helpers';
 
 
 const loginDataSchema = zod.object({
@@ -68,6 +69,7 @@ export const register = async (prevState: any, formData: FormData) => {
   const company = formData.get('company') as string;
   const industry = formData.get('industry') as string;
   const role = formData.get('role') as string;
+  const userColor = getRandomHexColor();
 
   const validatedFields = registerDataSchema.safeParse({
     name, email, password, confirmPassword, imageUrl, company, industry, role
@@ -92,6 +94,7 @@ export const register = async (prevState: any, formData: FormData) => {
         company,
         industry,
         role,
+        userColor, 
         createdAt: new Date().toISOString()
       }
     }
