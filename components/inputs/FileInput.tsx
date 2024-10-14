@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -13,9 +13,7 @@ interface IFileInput {
   label: string;
   userName?: string;
   userColor?: string;
-  value?: any;
   defaultValue?: any; 
-  onChange?: () => void;
 }
 
 export const FileInput = ({
@@ -23,11 +21,10 @@ export const FileInput = ({
   label, 
   userName,
   userColor, 
-  value, 
   defaultValue, 
-  onChange
 }: IFileInput) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const [imageUrl, setImageUrl] = useState<string>(defaultValue || '');
 
   const initials = userName ? extractFirstLetters(userName) : 'A';
   
@@ -35,15 +32,21 @@ export const FileInput = ({
     inputRef.current?.click();
   };
 
-  console.log('USER DATA', {userName, userColor})
+  const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if(e.target.files) {
+      const filesArray = Array.from(e.target.files);
+      const newImagesUrl = filesArray.map(file => URL.createObjectURL(file));
+      setImageUrl(newImagesUrl[0]);
+    }
+  };
 
   return (
     <div className='grid w-full items-center gap-1.5'>
       <Label htmlFor={name}>
         {label}
       </Label>
-      {(value || defaultValue) ? (
-        <Image src={value || defaultValue} alt='preview' />
+      {(imageUrl) ? (
+        <Image src={imageUrl} alt='preview' />
       ) : userName && userColor ? (
         <div 
           className='w-52 h-52 flex justify-center items-center rounded-md text-6xl text-white font-semibold' 
@@ -57,9 +60,9 @@ export const FileInput = ({
         id={name}
         name={name} 
         type='file'
-        value={value}
+        value={imageUrl}
         defaultValue={defaultValue} 
-        onChange={onChange}
+        onChange={handleImageUrlChange}
         className='hidden'
       />
       <Button onClick={handleClick} className='bg-slate-500'>

@@ -28,5 +28,5 @@ export const ProfileImageForm = ({ userName, userColor }: IProfileImageForm) => 
         </div>
       </form>
     </div>
-  )
-}
+  );
+};
