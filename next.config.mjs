@@ -7,6 +7,11 @@ const nextConfig = {
         hostname: 'kevinsharuk.wordpress.com',
         pathname: '**',
       },
+      {
+        protocol: 'https',
+        hostname: 'edtbinjkmfbdbpsugiiu.supabase.co',
+        pathname: '**',
+      }
     ],
   },
 };

@@ -23,6 +23,7 @@ const ProfileSettingsPage = async ({
       <ProfileImageForm 
         userName={user.data.user?.user_metadata.name} 
         userColor={user.data.user?.user_metadata.userColor} 
+        userImageUrl={user.data.user?.user_metadata.imageUrl}
       />
     </div>
   );

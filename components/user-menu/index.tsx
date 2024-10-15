@@ -9,7 +9,7 @@ import { MenuDropdown } from './menu-dropdown';
 interface IUserMenu {
   user: User | null;
   error: any;
-}
+};
 
 
 export const UserMenu = ({ user, error }: IUserMenu) => {
@@ -19,7 +19,10 @@ export const UserMenu = ({ user, error }: IUserMenu) => {
   
   return (
     <div>
-      {user ? <MenuDropdown user={user} /> : <Link href='/login'>Sign In</Link>}
+      {user ? 
+        <MenuDropdown user={user} /> : 
+        <Link href='/login'>Sign In</Link>
+      }
     </div>
   );
 };

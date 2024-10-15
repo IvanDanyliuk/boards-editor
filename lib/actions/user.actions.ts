@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache';
 import { z as zod } from 'zod';
 import db from '../db';
 import { createServerClient } from '../db/clients/server';
+import { removeImage, uploadImage } from '../db/storage/client';
 
 
 const userDataSchema = zod.object({
@@ -60,3 +61,49 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
 
   revalidatePath('/', 'layout');
 };
+
+export const updateProfilePhoto = async (prevState: any, formData: FormData) => {
+  const newProfileImage = formData.get('profileImage') as any;
+
+  const supabase = createServerClient();
+  const currentUser = await supabase.auth.getUser();
+  const currentProfilePhotoUrl = currentUser.data.user ? currentUser.data.user?.user_metadata.imageUrl : '';
+  const currentProfilePhoto = currentProfilePhotoUrl.slice(currentProfilePhotoUrl.lastIndexOf('/') + 1);
+
+  const { imageUrl, message } = await uploadImage({
+    file: newProfileImage,
+    bucket: process.env.SUPABASE_STORAGE_BUCKET!,
+  });
+
+  if(message) {
+    return {
+      error: {
+        uploadUserImage: [message]
+      }
+    }
+  }
+  
+  const { data, error } = await supabase.auth.updateUser({
+    data: {
+      imageUrl
+    }
+  });
+
+  if(imageUrl && !error) {
+    const { message } = await removeImage({
+      imagePath: currentProfilePhoto,
+      bucket: process.env.SUPABASE_STORAGE_BUCKET!
+    });
+    console.log('REMOVE IMAGE', message)
+  }
+
+  if (error) {
+    return {
+      error: {
+        uploadUserImage: [error.message],
+      },
+    };
+  }
+
+  revalidatePath('/', 'layout');
+}

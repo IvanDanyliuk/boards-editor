@@ -11,6 +11,7 @@ import { register } from '@/lib/actions/auth.actions';
 import { INDUSTRIES, ROLES } from '@/lib/constants';
 import { TextField } from '@/components/inputs/TextField';
 import { SelectField } from '@/components/inputs/SelectField';
+import { FileInput } from '@/components/inputs/FileInput';
 
 
 const initialState = {
@@ -62,10 +63,10 @@ export const RegisterForm = () => {
         label='Confirm Password' 
         type='password' 
       />
-      <div className='grid w-full items-center gap-1.5'>
-        <Label htmlFor='imageUrl'>Profile Image</Label>
-        <Input id='imageUrl' name='imageUrl' type='file' />
-      </div>
+      <FileInput 
+        name='imageUrl' 
+        label='Profile Image' 
+      />
       <TextField 
         name='company' 
         label='Company' 

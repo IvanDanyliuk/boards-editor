@@ -6,6 +6,7 @@ import { z as zod } from 'zod';
 import { createServerClient } from '../db/clients/server';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
 import { getRandomHexColor } from '../helpers';
+import { uploadImage } from '../db/storage/client';
 
 
 const loginDataSchema = zod.object({
@@ -21,7 +22,7 @@ const registerDataSchema = zod.object({
   company: zod.string().optional(),
   industry: zod.string().optional(),
   role: zod.string().optional(),
-  imageUrl: zod
+  profilePhoto: zod
     .instanceof(File)
     .optional()
     .refine(file => !file || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
@@ -65,14 +66,14 @@ export const register = async (prevState: any, formData: FormData) => {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
   const confirmPassword = formData.get('confirmPassword') as string;
-  const imageUrl = formData.get('imageUrl');
+  const profilePhoto = formData.get('imageUrl') as any;
   const company = formData.get('company') as string;
   const industry = formData.get('industry') as string;
   const role = formData.get('role') as string;
   const userColor = getRandomHexColor();
 
   const validatedFields = registerDataSchema.safeParse({
-    name, email, password, confirmPassword, imageUrl, company, industry, role
+    name, email, password, confirmPassword, profilePhoto, company, industry, role
   });
 
   if (!validatedFields.success) {
@@ -83,6 +84,19 @@ export const register = async (prevState: any, formData: FormData) => {
 
   const supabase = createServerClient();
 
+  const profileImage = profilePhoto ? await uploadImage({
+    file: profilePhoto,
+    bucket: process.env.SUPABASE_STORAGE_BUCKET!,
+  }) : null;
+
+  if(profileImage && profileImage.message) {
+    return {
+      error: {
+        uploadUserImage: [profileImage.message]
+      }
+    }
+  }
+
   const { error } = await supabase.auth.signUp({
     email: email as string,
     password: password as string,
@@ -90,7 +104,7 @@ export const register = async (prevState: any, formData: FormData) => {
       data: {
         id: crypto.randomUUID(),
         name,
-        imageUrl: 'https://kevinsharuk.wordpress.com/wp-content/uploads/2013/05/mrbean.jpg',
+        imageUrl: profileImage ? profileImage?.imageUrl : '',
         company,
         industry,
         role,

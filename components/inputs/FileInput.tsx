@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Image from 'next/image';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
@@ -24,7 +24,7 @@ export const FileInput = ({
   defaultValue, 
 }: IFileInput) => {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [imageUrl, setImageUrl] = useState<string>(defaultValue || '');
+  const [previewImageUrl, setPreviewImageUrl] = useState<string>(defaultValue || '')
 
   const initials = userName ? extractFirstLetters(userName) : 'A';
   
@@ -35,8 +35,8 @@ export const FileInput = ({
   const handleImageUrlChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if(e.target.files) {
       const filesArray = Array.from(e.target.files);
-      const newImagesUrl = filesArray.map(file => URL.createObjectURL(file));
-      setImageUrl(newImagesUrl[0]);
+      const newImagesUrl = URL.createObjectURL(filesArray[0]);
+      setPreviewImageUrl(newImagesUrl);
     }
   };
 
@@ -45,8 +45,8 @@ export const FileInput = ({
       <Label htmlFor={name}>
         {label}
       </Label>
-      {(imageUrl) ? (
-        <Image src={imageUrl} alt='preview' />
+      {(previewImageUrl) ? (
+        <Image src={previewImageUrl} alt='preview' width={50} height={50} />
       ) : userName && userColor ? (
         <div 
           className='w-52 h-52 flex justify-center items-center rounded-md text-6xl text-white font-semibold' 
@@ -60,12 +60,10 @@ export const FileInput = ({
         id={name}
         name={name} 
         type='file'
-        value={imageUrl}
-        defaultValue={defaultValue} 
         onChange={handleImageUrlChange}
         className='hidden'
       />
-      <Button onClick={handleClick} className='bg-slate-500'>
+      <Button type='button' onClick={handleClick} className='bg-slate-500'>
         Select
       </Button>
     </div>
