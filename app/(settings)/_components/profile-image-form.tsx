@@ -3,13 +3,14 @@
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import Image from 'next/image';
+import { toast } from 'sonner';
+import { CircleAlert } from 'lucide-react';
 import { FileInput } from '@/components/inputs/FileInput';
 import { Button } from '@/components/ui/button';
 import { removeProfilePhoto, updateProfilePhoto } from '@/lib/actions/user.actions';
 import { extractFirstLetters } from '@/lib/helpers';
 import { Label } from '@/components/ui/label';
-import { toast } from 'sonner';
-import { CircleAlert } from 'lucide-react';
+
 
 
 interface IProfileImageForm {

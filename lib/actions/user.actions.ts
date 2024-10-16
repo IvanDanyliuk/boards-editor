@@ -2,7 +2,6 @@
 
 import { revalidatePath } from 'next/cache';
 import { z as zod } from 'zod';
-import db from '../db';
 import { createServerClient } from '../db/clients/server';
 import { removeImage, uploadImage } from '../db/storage/client';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
@@ -146,4 +145,22 @@ export const removeProfilePhoto = async (imagePath: string) => {
       },
     };
   }
+
+  const supabase = createServerClient();
+
+  const { data, error } = await supabase.auth.updateUser({
+    data: {
+      imageUrl: ''
+    }
+  });
+
+  if (error) {
+    return {
+      error: {
+        uploadUserImage: [error.message],
+      },
+    };
+  }
+
+  revalidatePath('/', 'layout');
 }
