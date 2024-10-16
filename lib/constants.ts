@@ -151,5 +151,5 @@ export const ROLES = [
 export const PROFILE_IMAGE_MAX_FILE_SIZE = 1024 * 1024 * 3;   // 3MB
 
 export const PROFILE_IMAGE_FILE_TYPES = [
-  'image/jpeg', 'image/png', 'image/svg',
+  'image/jpeg', 'image/jpg', 'image/png', 'image/svg',
 ];

@@ -5,7 +5,7 @@ import { useFormState } from 'react-dom';
 import Image from 'next/image';
 import { FileInput } from '@/components/inputs/FileInput';
 import { Button } from '@/components/ui/button';
-import { updateProfilePhoto } from '@/lib/actions/user.actions';
+import { removeProfilePhoto, updateProfilePhoto } from '@/lib/actions/user.actions';
 import { extractFirstLetters } from '@/lib/helpers';
 import { Label } from '@/components/ui/label';
 import { toast } from 'sonner';
@@ -27,8 +27,10 @@ export const ProfileImageForm = ({
   const [state, formAction] = useFormState<any, any>(updateProfilePhoto, { imageUrl: '' });
   const initials = userName ? extractFirstLetters(userName) : 'A';
 
-  const handleRemoveProfilePhoto = () => {
-    
+  const handleRemoveProfilePhoto = async () => {
+    if(userImageUrl) {
+      await removeProfilePhoto(userImageUrl);
+    };
   }
 
   useEffect(() => {

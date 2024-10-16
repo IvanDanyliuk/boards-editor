@@ -19,8 +19,8 @@ const updateProfilePhotoSchema = zod.object({
   profileImage: zod
   .instanceof(File)
   .optional()
-  .refine(file => !file || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
-  .refine(file => file && file.size === 0 || file && PROFILE_IMAGE_FILE_TYPES.includes(file?.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
+  .refine(file => !file || file.size !== 0 || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
+  .refine(file => !file || file.type === '' || PROFILE_IMAGE_FILE_TYPES.includes(file.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
 });
 
 
@@ -75,7 +75,7 @@ export const updateProfilePhoto = async (prevState: any, formData: FormData) => 
   const newProfileImage = formData.get('profileImage') as any;
 
   const validatedFields = updateProfilePhotoSchema.safeParse({
-    newProfileImage
+    profileImage: newProfileImage
   });
 
   if (!validatedFields.success) {
@@ -87,7 +87,6 @@ export const updateProfilePhoto = async (prevState: any, formData: FormData) => 
   const supabase = createServerClient();
   const currentUser = await supabase.auth.getUser();
   const currentProfilePhotoUrl = currentUser.data.user ? currentUser.data.user?.user_metadata.imageUrl : '';
-  const currentProfilePhoto = currentProfilePhotoUrl.slice(currentProfilePhotoUrl.lastIndexOf('/') + 1);
 
   const { imageUrl, message } = await uploadImage({
     file: newProfileImage,
@@ -110,10 +109,17 @@ export const updateProfilePhoto = async (prevState: any, formData: FormData) => 
 
   if(imageUrl && !error) {
     const { message } = await removeImage({
-      imagePath: currentProfilePhoto,
+      imagePath: currentProfilePhotoUrl,
       bucket: process.env.SUPABASE_STORAGE_BUCKET!
     });
-    console.log('REMOVE IMAGE', message)
+
+    if(message) {
+      return {
+        error: {
+          uploadUserImage: [message],
+        },
+      };
+    }
   }
 
   if (error) {
@@ -127,6 +133,17 @@ export const updateProfilePhoto = async (prevState: any, formData: FormData) => 
   revalidatePath('/', 'layout');
 };
 
-export const removeProfilePhoto = async () => {
-  
+export const removeProfilePhoto = async (imagePath: string) => {
+  const { message } = await removeImage({
+    imagePath,
+    bucket: process.env.SUPABASE_STORAGE_BUCKET!
+  });
+
+  if(message) {
+    return {
+      error: {
+        uploadUserImage: [message],
+      },
+    };
+  }
 }
