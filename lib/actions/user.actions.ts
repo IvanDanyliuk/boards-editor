@@ -5,6 +5,7 @@ import { z as zod } from 'zod';
 import db from '../db';
 import { createServerClient } from '../db/clients/server';
 import { removeImage, uploadImage } from '../db/storage/client';
+import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
 
 
 const userDataSchema = zod.object({
@@ -12,6 +13,14 @@ const userDataSchema = zod.object({
   company: zod.string().min(1, 'Company is required'),
   industry: zod.string().min(1, 'Industry is required'),
   role: zod.string().min(1, 'Role is required'),
+});
+
+const updateProfilePhotoSchema = zod.object({
+  profileImage: zod
+  .instanceof(File)
+  .optional()
+  .refine(file => !file || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
+  .refine(file => file && file.size === 0 || file && PROFILE_IMAGE_FILE_TYPES.includes(file?.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
 });
 
 
@@ -65,6 +74,16 @@ export const updateUserData = async (prevState: any, formData: FormData) => {
 export const updateProfilePhoto = async (prevState: any, formData: FormData) => {
   const newProfileImage = formData.get('profileImage') as any;
 
+  const validatedFields = updateProfilePhotoSchema.safeParse({
+    newProfileImage
+  });
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  };
+
   const supabase = createServerClient();
   const currentUser = await supabase.auth.getUser();
   const currentProfilePhotoUrl = currentUser.data.user ? currentUser.data.user?.user_metadata.imageUrl : '';
@@ -106,4 +125,8 @@ export const updateProfilePhoto = async (prevState: any, formData: FormData) => 
   }
 
   revalidatePath('/', 'layout');
+};
+
+export const removeProfilePhoto = async () => {
+  
 }

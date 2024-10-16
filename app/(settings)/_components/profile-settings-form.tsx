@@ -1,12 +1,14 @@
 'use client';
 
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
 import { updateUserData } from '@/lib/actions/user.actions';
 import { INDUSTRIES, ROLES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { TextField } from '@/components/inputs/TextField';
 import { SelectField } from '@/components/inputs/SelectField';
+import { toast } from 'sonner';
+import { CircleAlert } from 'lucide-react';
 
 
 interface IProfileSettingsForm {
@@ -30,6 +32,15 @@ export const ProfileSettingsForm = ({
     industry,
     role
   });
+
+  useEffect(() => {
+    if(state && state.error) {
+      Object.values(state.error).forEach((error: any) => toast(error.join('. '), {
+        className: 'text-red-500',
+        icon: <CircleAlert />
+      }));
+    }
+  }, [state, formAction]);
 
   return (
     <form 
