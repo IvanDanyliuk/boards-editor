@@ -1,6 +1,7 @@
 import { getCurrentUser } from "@/lib/actions/user.actions";
 import { ProfileSettingsForm } from "../../_components/profile-settings-form";
 import { ProfileImageForm } from "../../_components/profile-image-form";
+import { UpdatePasswordSection } from "../../_components/update-password-section";
 
 
 const ProfileSettingsPage = async ({ 
@@ -14,12 +15,15 @@ const ProfileSettingsPage = async ({
 
   return (
     <div className='flex flex-col md:flex-row gap-3 md:gap-8'>
-      <ProfileSettingsForm 
-        name={user.data.user?.user_metadata.name} 
-        company={user.data.user?.user_metadata.company} 
-        industry={user.data.user?.user_metadata.industry} 
-        role={user.data.user?.user_metadata.role} 
-      />
+      <div className='flex flex-col flex-1 gap-3'>
+        <ProfileSettingsForm 
+          name={user.data.user?.user_metadata.name} 
+          company={user.data.user?.user_metadata.company} 
+          industry={user.data.user?.user_metadata.industry} 
+          role={user.data.user?.user_metadata.role} 
+        />
+        <UpdatePasswordSection />
+      </div>
       <ProfileImageForm 
         userName={user.data.user?.user_metadata.name} 
         userColor={user.data.user?.user_metadata.userColor} 

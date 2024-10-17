@@ -32,6 +32,15 @@ const registerDataSchema = zod.object({
   message: 'Passwords do not match',
 });
 
+const updatePasswordSchema = zod.object({
+  currentPassword: zod.string().min(1, 'Enter your current password').min(6, 'Password must have 6 characters'),
+  newPassword: zod.string().min(1, 'Enter your current password').min(6, 'Password must have 6 characters'),
+  confirmNewPassword: zod.string().min(1, 'New password confirmation is required'),
+}).refine(data => data.newPassword === data.confirmNewPassword, {
+  path: ['confirmNewPassword'],
+  message: 'Passwords do not match',
+});
+
 export const login = async (prevState: any, formData: FormData) => {
   const email = formData.get('email') as string;
   const password = formData.get('password') as string;
@@ -142,3 +151,21 @@ export const logout = async () => {
   redirect('/login');
 };
 
+export const updatePassword = async (prevState: any, formData: FormData) => {
+  const currentPassword = formData.get('currentPassword') as string;
+  const newPassword = formData.get('newPassword') as string;
+  const confirmNewPassword = formData.get('confirmNewPassword') as string;
+
+  const validatedFields = updatePasswordSchema.safeParse({
+    currentPassword, newPassword, confirmNewPassword
+  });
+
+  if (!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  };
+
+  const supabase = createServerClient();
+  
+}
