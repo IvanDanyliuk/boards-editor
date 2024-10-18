@@ -1,7 +1,7 @@
-import { getCurrentUser } from "@/lib/actions/user.actions";
-import { ProfileSettingsForm } from "../../_components/profile-settings-form";
-import { ProfileImageForm } from "../../_components/profile-image-form";
-import { UpdatePasswordSection } from "../../_components/update-password-section";
+import { getCurrentUser } from '@/lib/actions/user.actions';
+import { ProfileSettingsForm } from '../../_components/profile-settings-form';
+import { ProfileImageForm } from '../../_components/profile-image-form';
+import { UpdatePasswordSection } from '../../_components/update-password-section';
 
 
 const ProfileSettingsPage = async ({ 
@@ -22,7 +22,7 @@ const ProfileSettingsPage = async ({
           industry={user.data.user?.user_metadata.industry} 
           role={user.data.user?.user_metadata.role} 
         />
-        <UpdatePasswordSection />
+        <UpdatePasswordSection email={user.data.user?.email!} />
       </div>
       <ProfileImageForm 
         userName={user.data.user?.user_metadata.name} 

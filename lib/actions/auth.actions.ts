@@ -2,6 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { headers } from 'next/headers';
 import { z as zod } from 'zod';
 import { createServerClient } from '../db/clients/server';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
@@ -33,8 +34,7 @@ const registerDataSchema = zod.object({
 });
 
 const updatePasswordSchema = zod.object({
-  currentPassword: zod.string().min(1, 'Enter your current password').min(6, 'Password must have 6 characters'),
-  newPassword: zod.string().min(1, 'Enter your current password').min(6, 'Password must have 6 characters'),
+  newPassword: zod.string().min(1, 'Enter your new password').min(6, 'Password must have 6 characters'),
   confirmNewPassword: zod.string().min(1, 'New password confirmation is required'),
 }).refine(data => data.newPassword === data.confirmNewPassword, {
   path: ['confirmNewPassword'],
@@ -151,13 +151,31 @@ export const logout = async () => {
   redirect('/login');
 };
 
+export const sendPasswordVerificationEmail = async (email: string) => {
+  const origin = headers().get('origin');
+
+  const supabase = createServerClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${origin}/reset-password`
+  });
+
+  if(error) {
+    return {
+      error: error.message
+    };
+  }
+
+  return {
+    message: `The verification link has been sent to ${email}. Check your email.`
+  };
+}
+
 export const updatePassword = async (prevState: any, formData: FormData) => {
-  const currentPassword = formData.get('currentPassword') as string;
   const newPassword = formData.get('newPassword') as string;
   const confirmNewPassword = formData.get('confirmNewPassword') as string;
 
   const validatedFields = updatePasswordSchema.safeParse({
-    currentPassword, newPassword, confirmNewPassword
+    newPassword, confirmNewPassword
   });
 
   if (!validatedFields.success) {
@@ -167,5 +185,17 @@ export const updatePassword = async (prevState: any, formData: FormData) => {
   };
 
   const supabase = createServerClient();
-  
-}
+  const { error } = await supabase.auth.updateUser({
+    password: newPassword
+  });
+
+  if(error) {
+    return {
+      error: {
+        resetPassword: [error.message],
+      }
+    };
+  }
+
+  redirect('/');
+};

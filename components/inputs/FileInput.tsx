@@ -2,11 +2,10 @@
 
 import { useRef, useState } from 'react';
 import Image from 'next/image';
+import { X } from 'lucide-react';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 import { Button } from '../ui/button';
-import { extractFirstLetters } from '@/lib/helpers';
-import { X } from 'lucide-react';
 
 
 interface IFileInput {
