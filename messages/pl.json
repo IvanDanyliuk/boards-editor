@@ -1,5 +1,41 @@
 {
-  "Example": {
-    "title": "Czesc!"
+  "Auth": {
+    "LoginForm": {
+      "email": "Adres e-mail",
+      "password": "Hasło",
+      "submitBtn": "Potwierdź"
+    },
+    "RegisterForm": {
+      "name": "Nazwa",
+      "email": "Adres e-mail",
+      "password": "Hasło",
+      "confirmPassword": "Potwierdź hasło",
+      "imageUrl": "Obraz profilowy",
+      "company": "Firma",
+      "industry": "Przemysł",
+      "role": "Rola",
+      "submitBtn": "Potwierdź"
+    },
+    "ResetPasswordForm": {
+      "newPassword": "Nowe hasło",
+      "confirmNewPassword": "Potwierdź nowe hasło",
+      "submitBtnLabel": "Potwierdź",
+      "cancelBtnLabel": "Anulować"
+    },
+    "LoginPage": {
+      "title": "Zalogować się",
+      "or": "albo",
+      "noAccountText": "Nie masz jeszcze konta w serwisie?",
+      "signUpLinkLabel": "Zarejestruj się"
+    },
+    "RegisterPage": {
+      "title": "Utwórz konto",
+      "or": "albo",
+      "accountPresentText": "Masz już konto?",
+      "signInLinkLabel": "Zaloguj się"
+    },
+    "ResetPasswordPage": {
+      "title": "Zresetuj hasło"
+    }
   }
 }

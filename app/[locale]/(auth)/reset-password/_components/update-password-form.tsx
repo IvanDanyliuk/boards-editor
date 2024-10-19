@@ -8,6 +8,7 @@ import { toast } from 'sonner';
 import { TextField } from '@/components/inputs/TextField';
 import { Button } from '@/components/ui/button';
 import { updatePassword } from '@/lib/actions/auth.actions';
+import { useTranslations } from 'next-intl';
 
 
 const initialState = {
@@ -18,6 +19,7 @@ const initialState = {
 
 
 export const UpdatePasswordForm = () => {
+  const t = useTranslations('Auth');
   const ref = useRef<HTMLFormElement>(null);
   const [state, formAction] = useFormState<any, any>(updatePassword, initialState);
 
@@ -38,12 +40,12 @@ export const UpdatePasswordForm = () => {
     <form ref={ref} action={formAction} className='w-full md:w-72 flex flex-col gap-3'>
       <TextField 
         name='newPassword' 
-        label='New password' 
+        label={t('ResetPasswordForm.newPassword')} 
         type='password' 
       />
       <TextField 
         name='confirmNewPassword' 
-        label='Confirm new password' 
+        label={t('ResetPasswordForm.confirmNewPassword')} 
         type='password' 
       />
       <div className='flex gap-3'>
@@ -51,14 +53,14 @@ export const UpdatePasswordForm = () => {
           type='submit' 
           className='flex-1'
         >
-          OK
+          {t('ResetPasswordForm.submitBtnLabel')}
         </Button>
         <Button 
           type='button' 
           onClick={handleDeclinePasswordChange}
           className='flex-1'
         >
-          Cancel
+          {t('ResetPasswordForm.cancelBtnLabel')}
         </Button>
       </div>
     </form>

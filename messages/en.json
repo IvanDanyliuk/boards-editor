@@ -1,5 +1,41 @@
 {
-  "Example": {
-    "title": "Hello!"
+  "Auth": {
+    "LoginForm": {
+      "email": "Email",
+      "password": "Password",
+      "submitBtn": "Submit"
+    },
+    "RegisterForm": {
+      "name": "Name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "imageUrl": "Profile Image",
+      "company": "Company",
+      "industry": "Industry",
+      "role": "Role",
+      "submitBtn": "Submit"
+    },
+    "ResetPasswordForm": {
+      "newPassword": "New password",
+      "confirmNewPassword": "Confirm new password",
+      "submitBtnLabel": "OK",
+      "cancelBtnLabel": "Cancel"
+    },
+    "LoginPage": {
+      "title": "Sign In",
+      "or": "or",
+      "noAccountText": "Do not have an account?",
+      "signUpLinkLabel": "Sign Up"
+    },
+    "RegisterPage": {
+      "title": "Create an account",
+      "or": "or",
+      "accountPresentText": "Already have an account?",
+      "signInLinkLabel": "Sign In"
+    },
+    "ResetPasswordPage": {
+      "title": "Reset Password"
+    }
   }
 }

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
+import { useTranslations } from 'next-intl';
 import { CircleAlert } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -22,6 +23,7 @@ const initialState = {
 
 
 export const LoginForm = () => {
+  const t = useTranslations('Auth');
   const ref = useRef<HTMLFormElement>(null);
   const [state, formAction] = useFormState<any, any>(login, initialState);
 
@@ -42,11 +44,11 @@ export const LoginForm = () => {
     >
       <TextField 
         name='email' 
-        label='Email' 
+        label={t('LoginForm.email')} 
       />
       <TextField 
         name='password' 
-        label='Password' 
+        label={t('LoginForm.password')} 
         type='password' 
       />
       <Button 
@@ -54,7 +56,7 @@ export const LoginForm = () => {
         variant='ghost' 
         className='w-full'
       >
-        Submit
+        {t('LoginForm.submitBtn')}
       </Button>
     </form>
   );

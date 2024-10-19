@@ -10,6 +10,7 @@ import { INDUSTRIES, ROLES } from '@/lib/constants';
 import { TextField } from '@/components/inputs/TextField';
 import { SelectField } from '@/components/inputs/SelectField';
 import { FileInput } from '@/components/inputs/FileInput';
+import { useTranslations } from 'next-intl';
 
 
 const initialState = {
@@ -25,6 +26,7 @@ const initialState = {
 
 
 export const RegisterForm = () => {
+  const t = useTranslations('Auth');
   const ref = useRef<HTMLFormElement>(null);
   const [state, formAction] = useFormState<any, any>(register, initialState);
 
@@ -45,39 +47,39 @@ export const RegisterForm = () => {
     >
       <TextField 
         name='name' 
-        label='Name' 
+        label={t('RegisterForm.name')} 
       />
       <TextField 
         name='email' 
-        label='Email' 
+        label={t('RegisterForm.email')} 
       />
       <TextField 
         name='password' 
-        label='Password' 
+        label={t('RegisterForm.password')} 
         type='password' 
       />
       <TextField 
         name='confirmPassword' 
-        label='Confirm Password' 
+        label={t('RegisterForm.confirmPassword')} 
         type='password' 
       />
       <FileInput 
         name='imageUrl' 
-        label='Profile Image' 
+        label={t('RegisterForm.imageUrl')} 
       />
       <TextField 
         name='company' 
-        label='Company' 
+        label={t('RegisterForm.company')} 
       />
       <SelectField 
         name='industry'
-        label='Industry'
+        label={t('RegisterForm.industry')}
         placeholder='Select an industry'
         options={INDUSTRIES}
       />
       <SelectField 
         name='role'
-        label='Role'
+        label={t('RegisterForm.role')}
         placeholder='Select a role'
         options={ROLES}
       />
@@ -86,7 +88,7 @@ export const RegisterForm = () => {
         variant='ghost' 
         className='w-full'
       >
-        Submit
+        {t('RegisterForm.submitBtn')}
       </Button>
     </form>
   );

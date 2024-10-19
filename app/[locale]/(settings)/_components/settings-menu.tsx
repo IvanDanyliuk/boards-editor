@@ -1,8 +1,6 @@
-'use client'
-
 import Link from 'next/link';
-import { History, PanelsLeftBottom, Users } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { History, PanelsLeftBottom, Users } from 'lucide-react';
 
 
 interface ISettingsMenu {
@@ -11,7 +9,8 @@ interface ISettingsMenu {
 
 
 export const SettingsMenu = ({ userId }: ISettingsMenu) => {
-  const t = useTranslations('Example')
+  const t = useTranslations('Example');
+  
   const links = [
     {
       href: `/profile/${userId}/`,

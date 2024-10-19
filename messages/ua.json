@@ -1,5 +1,41 @@
 {
-  "Example": {
-    "title": "Привіт!"
+  "Auth": {
+    "LoginForm": {
+      "email": "Ел. пошта",
+      "password": "Пароль",
+      "submitBtn": "Підтвердити"
+    },
+    "RegisterForm": {
+      "name": "Ім'я",
+      "email": "Ел. пошта",
+      "password": "Пароль",
+      "confirmPassword": "Підтвердити пароль",
+      "imageUrl": "Фото профілю",
+      "company": "Компанія",
+      "industry": "Галузь",
+      "role": "Роль",
+      "submitBtn": "Підтвердити"
+    },
+    "ResetPasswordForm": {
+      "newPassword": "Новий пароль",
+      "confirmNewPassword": "Підтвердити новий пароль",
+      "submitBtnLabel": "OK",
+      "cancelBtnLabel": "Відмінити"
+    },
+    "LoginPage": {
+      "title": "Увійти",
+      "or": "або",
+      "noAccountText": "Немає облікового запису?",
+      "signUpLinkLabel": "Зареєструйтеся"
+    },
+    "RegisterPage": {
+      "title": "Створити обліковий запис",
+      "or": "або",
+      "accountPresentText": "Вже маєте обліковий запис?",
+      "signInLinkLabel": "Увійти"
+    },
+    "ResetPasswordPage": {
+      "title": "Змінити пароль"
+    }
   }
 }
