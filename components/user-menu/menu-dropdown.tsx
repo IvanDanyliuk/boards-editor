@@ -30,7 +30,7 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
               height={50} 
               className='rounded-full' 
             /> : 
-            <div className='w-[50px] h-[50px] flex justify-center items-center rounded-full font-semibold text-white bg-green-500'>
+            <div className='w-[50px] h-[50px] flex justify-center items-center rounded-full font-semibold text-white' style={{ background: user.user_metadata.userColor }}>
               {user.user_metadata.name.split(' ').map((char: string) => char[0]).slice(0, 2).join('').toUpperCase()}
             </div>
           } 
@@ -38,13 +38,18 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel className='mb-3 flex items-center gap-3'>
-          <Image 
-            src={user.user_metadata.imageUrl} 
-            alt='Profile image' 
-            width={50} 
-            height={50} 
-            className='rounded-full' 
-          />
+        {user.user_metadata.imageUrl ? 
+            <Image 
+              src={user.user_metadata.imageUrl} 
+              alt='Profile image' 
+              width={50} 
+              height={50} 
+              className='rounded-full' 
+            /> : 
+            <div className='w-[50px] h-[50px] flex justify-center items-center rounded-full font-semibold text-white' style={{ background: user.user_metadata.userColor }}>
+              {user.user_metadata.name.split(' ').map((char: string) => char[0]).slice(0, 2).join('').toUpperCase()}
+            </div>
+          } 
           <div>
             <p className='text-base'>
               {user.user_metadata.name}

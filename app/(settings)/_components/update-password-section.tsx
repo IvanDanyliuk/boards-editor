@@ -1,4 +1,4 @@
-'use client';
+  'use client';
 
 import { CircleAlert, CircleCheckBig } from 'lucide-react';
 import { toast } from 'sonner';
@@ -30,10 +30,11 @@ export const UpdatePasswordSection = ({ email }: IUpdatePasswordSection) => {
   }
   return (
     <div className='w-full flex justify-between items-center'>
-      <p>Password</p>
+      <p className='text-sm font-semibold'>Password</p>
       <Button 
         type='button' 
         onClick={handleSendVerificationLink}
+        className='min-w-44'
       >
         Update
       </Button>

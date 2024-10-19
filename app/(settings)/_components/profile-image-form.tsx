@@ -35,6 +35,7 @@ export const ProfileImageForm = ({
   }
 
   useEffect(() => {
+    // console.log('USER IMAGE FORM', userImageUrl)
     if(state && state.error) {
       Object.values(state.error).forEach((error: any) => toast(error.join('. '), {
         className: 'text-red-500',

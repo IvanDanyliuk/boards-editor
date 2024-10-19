@@ -2,6 +2,7 @@ import { getCurrentUser } from '@/lib/actions/user.actions';
 import { ProfileSettingsForm } from '../../_components/profile-settings-form';
 import { ProfileImageForm } from '../../_components/profile-image-form';
 import { UpdatePasswordSection } from '../../_components/update-password-section';
+import { UpdateEmailSection } from '../../_components/update-email-section';
 
 
 const ProfileSettingsPage = async ({ 
@@ -23,6 +24,7 @@ const ProfileSettingsPage = async ({
           role={user.data.user?.user_metadata.role} 
         />
         <UpdatePasswordSection email={user.data.user?.email!} />
+        <UpdateEmailSection />
       </div>
       <ProfileImageForm 
         userName={user.data.user?.user_metadata.name} 

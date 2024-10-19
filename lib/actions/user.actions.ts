@@ -22,15 +22,6 @@ const updateProfilePhotoSchema = zod.object({
   .refine(file => !file || file.type === '' || PROFILE_IMAGE_FILE_TYPES.includes(file.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
 });
 
-const passwordSchema = zod.object({
-  currentPassword: zod.string().min(1, 'Enter your current password.').min(6, 'Password must have 6 characters'),
-  newPassword: zod.string().min(1, 'Enter your new password.').min(6, 'Password must have 6 characters'),
-  confirmNewPassword: zod.string().min(1, 'Confirm your new password.').min(6, 'Password must have 6 characters'),
-}).refine(data => data.newPassword === data.confirmNewPassword, {
-  path: ['confirmNewPassword'],
-  message: 'Passwords do not match',
-});
-
 
 export const getCurrentUser = async () => {
   const supabase = createServerClient();
@@ -174,24 +165,3 @@ export const removeProfilePhoto = async (imagePath: string) => {
   revalidatePath('/', 'layout');
 };
 
-export const updateEmail = async (prevState: any, formData: FormData) => {
-  const currentPassword = formData.get('currentPassword') as string;
-  const newPassword = formData.get('newPassword') as string;
-  const confirmNewPassword = formData.get('confirmNewPassword') as string;
-
-  const validatedFields = passwordSchema.safeParse({
-    currentPassword, newPassword, confirmNewPassword
-  });
-
-  if(!validatedFields.success) {
-    return {
-      error: validatedFields.error.flatten().fieldErrors,
-    };
-  }
-
-  const supabase = createServerClient();
-
-  // const { data, error } = supabase.auth.resetPasswordForEmail()
-
-  revalidatePath('/', 'layout');
-}

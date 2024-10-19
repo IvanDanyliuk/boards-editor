@@ -33,6 +33,10 @@ const registerDataSchema = zod.object({
   message: 'Passwords do not match',
 });
 
+const updateEmailSchema = zod.object({
+  email: zod.string().min(1, 'Email is required').email('Invalid email'),
+});
+
 const updatePasswordSchema = zod.object({
   newPassword: zod.string().min(1, 'Enter your new password').min(6, 'Password must have 6 characters'),
   confirmNewPassword: zod.string().min(1, 'New password confirmation is required'),
@@ -93,7 +97,7 @@ export const register = async (prevState: any, formData: FormData) => {
 
   const supabase = createServerClient();
 
-  const profileImage = profilePhoto ? await uploadImage({
+  const profileImage = profilePhoto.size !== 0 ? await uploadImage({
     file: profilePhoto,
     bucket: process.env.SUPABASE_STORAGE_BUCKET!,
   }) : null;
@@ -150,6 +154,34 @@ export const logout = async () => {
   revalidatePath('/login', 'layout');
   redirect('/login');
 };
+
+export const updateEmail = async (prevState: any, formData: FormData) => {
+  const email = formData.get('email') as string;
+
+  const validatedFields = updateEmailSchema.safeParse({ email });
+
+  if(!validatedFields.success) {
+    return {
+      error: validatedFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const supabase = createServerClient();
+
+  const { error } = await supabase.auth.updateUser({ email, data: { email } });
+
+  if (error) {
+    return {
+      error: {
+        email: [error.message],
+      },
+    };
+  }
+
+  await supabase.auth.refreshSession();
+
+  revalidatePath('/', 'layout');
+}
 
 export const sendPasswordVerificationEmail = async (email: string) => {
   const origin = headers().get('origin');
