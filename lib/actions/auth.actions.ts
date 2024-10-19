@@ -168,7 +168,7 @@ export const updateEmail = async (prevState: any, formData: FormData) => {
 
   const supabase = createServerClient();
 
-  const { error } = await supabase.auth.updateUser({ email, data: { email } });
+  const { data, error } = await supabase.auth.updateUser({ email, data: { email } });
 
   if (error) {
     return {
@@ -178,9 +178,14 @@ export const updateEmail = async (prevState: any, formData: FormData) => {
     };
   }
 
-  await supabase.auth.refreshSession();
+  // await supabase.auth.refreshSession();
 
-  revalidatePath('/', 'layout');
+  // revalidatePath('/', 'layout');
+  if(data.user) {
+    return {
+      success: `Verification link has been sent to ${email}. Check your email and follow instructions.`
+    }
+  } 
 }
 
 export const sendPasswordVerificationEmail = async (email: string) => {

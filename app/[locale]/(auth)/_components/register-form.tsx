@@ -5,8 +5,6 @@ import { useFormState } from 'react-dom';
 import { CircleAlert } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { register } from '@/lib/actions/auth.actions';
 import { INDUSTRIES, ROLES } from '@/lib/constants';
 import { TextField } from '@/components/inputs/TextField';

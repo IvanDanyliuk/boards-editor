@@ -2,13 +2,13 @@
 
 import { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
+import { CircleAlert } from 'lucide-react';
+import { toast } from 'sonner';
 import { updateUserData } from '@/lib/actions/user.actions';
 import { INDUSTRIES, ROLES } from '@/lib/constants';
 import { Button } from '@/components/ui/button';
 import { TextField } from '@/components/inputs/TextField';
 import { SelectField } from '@/components/inputs/SelectField';
-import { toast } from 'sonner';
-import { CircleAlert } from 'lucide-react';
 
 
 interface IProfileSettingsForm {

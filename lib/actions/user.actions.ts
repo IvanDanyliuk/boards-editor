@@ -9,9 +9,9 @@ import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../consta
 
 const userDataSchema = zod.object({
   name: zod.string().min(1, 'Name is required'),
-  company: zod.string().min(1, 'Company is required'),
-  industry: zod.string().min(1, 'Industry is required'),
-  role: zod.string().min(1, 'Role is required'),
+  company: zod.string().optional(),
+  industry: zod.string().optional(),
+  role: zod.string().optional(),
 });
 
 const updateProfilePhotoSchema = zod.object({

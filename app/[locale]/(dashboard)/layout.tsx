@@ -1,7 +1,7 @@
 import { redirect } from 'next/navigation';
 import { getCurrentUser } from '@/lib/actions/user.actions';
 import { Sidebar } from './_components/sidebar';
-import { UserMenu } from '../../components/user-menu';
+import { UserMenu } from '../../../components/user-menu';
 import { Searchbar } from './_components/search-bar';
 
 
