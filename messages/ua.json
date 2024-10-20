@@ -1,4 +1,9 @@
 {
+  "NotFoundPage": {
+    "mainMessage": "Сторінку не знайдено",
+    "secondaryMessage": "Вибачте, сторінку, яку ви шукаєте, не знайдено",
+    "backLink": "Повернутися на головну сторінку"
+  },
   "Auth": {
     "LoginForm": {
       "email": "Ел. пошта",

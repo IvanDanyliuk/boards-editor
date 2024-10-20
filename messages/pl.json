@@ -1,6 +1,8 @@
 {
   "NotFoundPage": {
-    "mainMessage": ""
+    "mainMessage": "Strona nie znaleziona",
+    "secondaryMessage": "Przepraszamy, strona, której szukasz, nie została znaleziona",
+    "backLink": "Wróć do strony głównej"
   },
   "Auth": {
     "LoginForm": {
