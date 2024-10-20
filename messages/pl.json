@@ -37,5 +37,65 @@
     "ResetPasswordPage": {
       "title": "Zresetuj hasło"
     }
+  },
+  "Dashboard": {
+    "sidebar": {
+      "recentBoards": "Ostatnie tablice",
+      "starredBoards": "Oznaczone tablice"
+    },
+    "templates": {
+      "openDialogBtnLabel": "Szablony",
+      "dialogMenuItem1": "Wszystkie szablony",
+      "dialogMenuItem2": "Ostatni",
+      "dialogMenuItem3": "Popularny"
+    },
+    "StarredBoardsPage": {
+
+    },
+    "DashboardMainPage": {
+      
+    }
+  },
+  "Settings": {
+    "profileImageForm": {
+      "formLabel": "Zdjęcie profilowe",
+      "uploadBtnLabel": "Wgrywać",
+      "removeBtnLabel": "Usunąć"
+    },
+    "profileSettingsForm": {
+      "name": "Nazwa",
+      "company": "Firma",
+      "industry": "Przemysł",
+      "role": "Rola",
+      "submitBtnLabel": "Potwierdź"
+    },
+    "settingsMenu": {
+      "link1": "Ustawienia profilu",
+      "link2": "Profil zespołu",
+      "link3": "Użytkownicy zespołu"
+    },
+    "updateEmailForm": {
+      "formLabel": "Adres e-mail",
+      "openDialogBtnLabel": "Redagować",
+      "dialogTitle": "Aktualizuj e-mail",
+      "textFieldLabel": "Adres e-mail",
+      "submitBtnLabel": "Potwierdź"
+    },
+    "updatePasswordForm": {
+      "formLabel": "Hasło",
+      "actionBtnLabel": "Aktualizacja"
+    },
+    "teamProfile": {
+
+    },
+    "teamUsers": {
+
+    },
+    "profilePage": {
+
+    },
+    "settingsLayout": {
+      "backLink": "Przejdź do tablic"
+    }
   }
 }

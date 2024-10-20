@@ -9,30 +9,29 @@ interface ISettingsMenu {
 
 
 export const SettingsMenu = ({ userId }: ISettingsMenu) => {
-  const t = useTranslations('Example');
+  const t = useTranslations('Settings');
   
   const links = [
     {
       href: `/profile/${userId}/`,
       icon: <History />,
-      label: 'Profile settings',
+      label: t('settingsMenu.link1'),
     },
     {
       href: `/profile/${userId}/team-profile`,
       icon: <PanelsLeftBottom />,
-      label: 'Team profile',
+      label: t('settingsMenu.link2'),
     },
     {
       href: `/profile/${userId}/team-users`,
       icon: <Users />,
-      label: 'Team users',
+      label: t('settingsMenu.link3'),
     },
   ];
   
   return (
     <div className='p-3 h-fit flex flex-col gap-3 rounded-md bg-white'>
       <div>Team Menu</div>
-      <p>{t('title')}</p>
       <div className='w-full h-[1px] bg-page-bg' />
       {links.map(link => (
         <Link 

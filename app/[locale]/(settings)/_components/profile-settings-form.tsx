@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { useFormState } from 'react-dom';
+import { useTranslations } from 'next-intl';
 import { CircleAlert } from 'lucide-react';
 import { toast } from 'sonner';
 import { updateUserData } from '@/lib/actions/user.actions';
@@ -25,6 +26,7 @@ export const ProfileSettingsForm = ({
   industry,
   role
 }: IProfileSettingsForm) => {
+  const t = useTranslations('Settings');
   const ref = useRef<HTMLFormElement>(null);
   const [state, formAction] = useFormState<any, any>(updateUserData, {
     name,
@@ -50,23 +52,23 @@ export const ProfileSettingsForm = ({
     >
       <TextField 
         name='name' 
-        label='Name' 
+        label={t('profileSettingsForm.name')} 
         defaultValue={name} 
       />
       <TextField 
         name='company' 
-        label='Company' 
+        label={t('profileSettingsForm.company')} 
         defaultValue={company} 
       />
       <SelectField 
         name='industry' 
-        label='Industry' 
+        label={t('profileSettingsForm.industry')} 
         defaultValue={industry} 
         options={INDUSTRIES} 
       />
       <SelectField 
         name='role' 
-        label='Role' 
+        label={t('profileSettingsForm.role')} 
         defaultValue={role} 
         options={ROLES} 
       />
@@ -74,7 +76,7 @@ export const ProfileSettingsForm = ({
         type='submit' 
         className='w-full md:w-52'
       >
-        Submit
+        {t('profileSettingsForm.submitBtnLabel')}
       </Button>
     </form>
   );

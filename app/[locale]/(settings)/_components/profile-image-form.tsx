@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { CircleAlert } from 'lucide-react';
 import { FileInput } from '@/components/inputs/FileInput';
@@ -25,6 +26,7 @@ export const ProfileImageForm = ({
   userColor, 
   userImageUrl 
 }: IProfileImageForm) => {
+  const t = useTranslations('Settings');
   const [state, formAction] = useFormState<any, any>(updateProfilePhoto, { imageUrl: '' });
   const initials = userName ? extractFirstLetters(userName) : 'A';
 
@@ -35,7 +37,6 @@ export const ProfileImageForm = ({
   }
 
   useEffect(() => {
-    // console.log('USER IMAGE FORM', userImageUrl)
     if(state && state.error) {
       Object.values(state.error).forEach((error: any) => toast(error.join('. '), {
         className: 'text-red-500',
@@ -47,7 +48,7 @@ export const ProfileImageForm = ({
   return (
     <div className='w-full md:w-96 flex flex-col gap-1.5'>
       <Label htmlFor='imageUrl'>
-        Profile Photo
+        {t('profileImageForm.formLabel')}
       </Label>
       {userImageUrl ? (
         <div className='relative w-[300px] h-[300px] overflow-hidden rounded-md'>
@@ -65,10 +66,10 @@ export const ProfileImageForm = ({
         <FileInput name='profileImage' />
         <div className='mt-3 w-full flex gap-3'>
           <Button type='submit' className='flex-1'>
-            Upload
+            {t('profileImageForm.uploadBtnLabel')}
           </Button>
           <Button type='button' onClick={handleRemoveProfilePhoto} className='flex-1'>
-            Remove
+            {t('profileImageForm.removeBtnLabel')}
           </Button>
         </div>
       </form>

@@ -1,5 +1,10 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useFormState } from 'react-dom';
+import { useTranslations } from 'next-intl';
+import { CircleAlert } from 'lucide-react';
+import { toast } from 'sonner';
 import { TextField } from '@/components/inputs/TextField';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,13 +15,10 @@ import {
 } from '@/components/ui/dialog';
 import { updateEmail } from '@/lib/actions/auth.actions';
 import { DialogTitle } from '@radix-ui/react-dialog';
-import { CircleAlert, CircleCheckBig } from 'lucide-react';
-import { useEffect } from 'react';
-import { useFormState } from 'react-dom';
-import { toast } from 'sonner';
 
 
 export const UpdateEmailSection = () => {
+  const t = useTranslations('Settings');
   const [state, formAction] = useFormState<any, any>(updateEmail, { email: '' });
   
   useEffect(() => {
@@ -30,21 +32,32 @@ export const UpdateEmailSection = () => {
 
   return (
     <div className='w-full flex justify-between items-center'>
-      <p className='text-sm font-semibold'>Email</p>
+      <p className='text-sm font-semibold'>
+        {t('updateEmailForm.formLabel')}
+      </p>
       <Dialog>
         <DialogTrigger asChild>
-          <Button className='min-w-44'>Edit</Button>
+          <Button className='min-w-44'>
+            {t('updateEmailForm.openDialogBtnLabel')}
+          </Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>
-            <DialogTitle>Update email</DialogTitle>
+            <DialogTitle>
+              {t('updateEmailForm.dialogTitle')}
+            </DialogTitle>
           </DialogHeader>
           <form action={formAction} className='flex flex-col gap-3'>
-            <TextField name='email' label='Email' />
-            <Button type='submit'>Submit</Button>
+            <TextField 
+              name='email' 
+              label={t('updateEmailForm.textFieldLabel')} 
+            />
+            <Button type='submit'>
+              {t('updateEmailForm.submitBtnLabel')}
+            </Button>
           </form>
         </DialogContent>
       </Dialog>
     </div>
-  )
-}
+  );
+};

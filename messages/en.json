@@ -37,5 +37,65 @@
     "ResetPasswordPage": {
       "title": "Reset Password"
     }
+  },
+  "Dashboard": {
+    "sidebar": {
+      "recentBoards": "Recent boards",
+      "starredBoards": "Starred Boards"
+    },
+    "templates": {
+      "openDialogBtnLabel": "Templates",
+      "dialogMenuItem1": "All templates",
+      "dialogMenuItem2": "Recent",
+      "dialogMenuItem3": "Popular"
+    },
+    "StarredBoardsPage": {
+
+    },
+    "DashboardMainPage": {
+      
+    }
+  },
+  "Settings": {
+    "profileImageForm": {
+      "formLabel": "Profile Photo",
+      "uploadBtnLabel": "Upload",
+      "removeBtnLabel": "Remove"
+    },
+    "profileSettingsForm": {
+      "name": "Name",
+      "company": "Company",
+      "industry": "Industry",
+      "role": "Role",
+      "submitBtnLabel": "Submit"
+    },
+    "settingsMenu": {
+      "link1": "Profile settings",
+      "link2": "Team profile",
+      "link3": "Team users"
+    },
+    "updateEmailForm": {
+      "formLabel": "Email",
+      "openDialogBtnLabel": "Edit",
+      "dialogTitle": "Update email",
+      "textFieldLabel": "Email",
+      "submitBtnLabel": "Submit"
+    },
+    "updatePasswordForm": {
+      "formLabel": "Password",
+      "actionBtnLabel": "Update"
+    },
+    "teamProfile": {
+
+    },
+    "teamUsers": {
+
+    },
+    "profilePage": {
+
+    },
+    "settingsLayout": {
+      "backLink": "Go to boards"
+    }
   }
 }

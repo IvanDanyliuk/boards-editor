@@ -37,5 +37,65 @@
     "ResetPasswordPage": {
       "title": "Змінити пароль"
     }
+  },
+  "Dashboard": {
+    "sidebar": {
+      "recentBoards": "Останні дошки",
+      "starredBoards": "Відмічені дошки"
+    },
+    "templates": {
+      "openDialogBtnLabel": "Шаблони",
+      "dialogMenuItem1": "Всі шаблони",
+      "dialogMenuItem2": "Останні",
+      "dialogMenuItem3": "Популярні"
+    },
+    "StarredBoardsPage": {
+
+    },
+    "DashboardMainPage": {
+      
+    }
+  },
+  "Settings": {
+    "profileImageForm": {
+      "formLabel": "Фото профілю",
+      "uploadBtnLabel": "Завантажити",
+      "removeBtnLabel": "Видалити"
+    },
+    "profileSettingsForm": {
+      "name": "Ім'я",
+      "company": "Компанія",
+      "industry": "Галузь",
+      "role": "Роль",
+      "submitBtnLabel": "Підтвердити"
+    },
+    "settingsMenu": {
+      "link1": "Налаштування профілю",
+      "link2": "Профіль команди",
+      "link3": "Користувачі команди"
+    },
+    "updateEmailForm": {
+      "formLabel": "Ел. пошта",
+      "openDialogBtnLabel": "Редагувати",
+      "dialogTitle": "Оновити ел. пошту",
+      "textFieldLabel": "Ул. пошта",
+      "submitBtnLabel": "Підтвердити"
+    },
+    "updatePasswordForm": {
+      "formLabel": "Пароль",
+      "actionBtnLabel": "Оновити"
+    },
+    "teamProfile": {
+
+    },
+    "teamUsers": {
+
+    },
+    "profilePage": {
+
+    },
+    "settingsLayout": {
+      "backLink": "Повернутися до дошок"
+    }
   }
 }

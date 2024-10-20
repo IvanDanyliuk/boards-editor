@@ -1,6 +1,7 @@
   'use client';
 
 import { CircleAlert, CircleCheckBig } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { sendPasswordVerificationEmail } from '@/lib/actions/auth.actions';
@@ -11,6 +12,8 @@ interface IUpdatePasswordSection {
 }
 
 export const UpdatePasswordSection = ({ email }: IUpdatePasswordSection) => {
+  const t = useTranslations('Settings');
+
   const handleSendVerificationLink = async () => {
     const verificationStatusMessage = await sendPasswordVerificationEmail(email);
 
@@ -30,13 +33,15 @@ export const UpdatePasswordSection = ({ email }: IUpdatePasswordSection) => {
   }
   return (
     <div className='w-full flex justify-between items-center'>
-      <p className='text-sm font-semibold'>Password</p>
+      <p className='text-sm font-semibold'>
+        {t('updatePasswordForm.formLabel')}
+      </p>
       <Button 
         type='button' 
         onClick={handleSendVerificationLink}
         className='min-w-44'
       >
-        Update
+        {t('updatePasswordForm.actionBtnLabel')}
       </Button>
     </div>
   );

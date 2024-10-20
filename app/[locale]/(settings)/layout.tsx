@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
+import { useTranslations } from 'next-intl';
 import { LayoutGrid } from 'lucide-react';
 import { UserMenu } from '@/components/user-menu';
 import { getCurrentUser } from '@/lib/actions/user.actions';
@@ -12,6 +13,7 @@ interface ISettingsLayout {
 
 
 const SettingsLayout = async ({ children }: ISettingsLayout) => {
+  const t = useTranslations('Settings');
   const { data, error } = await getCurrentUser();
 
   if (!data.user) {
@@ -23,7 +25,7 @@ const SettingsLayout = async ({ children }: ISettingsLayout) => {
       <header className='px-3 md:px-10 w-full h-[80px] flex justify-between items-center bg-white'>
         <Link href='/' className='flex'>
           <LayoutGrid className='mr-3' />
-          Go to boards
+          {t('settingsLayout.backLink')}
         </Link>
         <UserMenu 
           user={data.user} 

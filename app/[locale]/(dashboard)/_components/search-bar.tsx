@@ -19,7 +19,11 @@ export const Searchbar = () => {
       <PopoverTrigger asChild>
         <div className='px-3 py-1 flex items-center gap-3 bg-white border rounded-md'>
           <Search className='text-secondary-text' />
-          <Input className='h-[30px] border-none' value={searchValue} onChange={(e) => setSearchValue(e.target.value)} />
+          <Input 
+            className='h-[30px] border-none' 
+            value={searchValue} 
+            onChange={(e) => setSearchValue(e.target.value)} 
+          />
         </div>
       </PopoverTrigger>
       <PopoverContent>
