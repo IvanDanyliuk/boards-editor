@@ -1,8 +1,9 @@
 'use client';
 
-import Link from 'next/link';
-import { User } from '@supabase/supabase-js';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
+import { User } from '@supabase/supabase-js';
+import { Link } from '@/i18n/routing';
 import { MenuDropdown } from './menu-dropdown';
 
 
@@ -13,6 +14,8 @@ interface IUserMenu {
 
 
 export const UserMenu = ({ user, error }: IUserMenu) => {
+  const t = useTranslations('Auth');
+
   if (error) {
     toast.error(error.message);
   }
@@ -21,7 +24,9 @@ export const UserMenu = ({ user, error }: IUserMenu) => {
     <div>
       {user ? 
         <MenuDropdown user={user} /> : 
-        <Link href='/login'>Sign In</Link>
+        <Link href='/login'>
+          {t('userMenu.signInBtnLabel')}
+        </Link>
       }
     </div>
   );

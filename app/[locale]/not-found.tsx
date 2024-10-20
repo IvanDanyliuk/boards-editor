@@ -1,9 +1,12 @@
-import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft } from 'lucide-react';
+import { Link } from '@/i18n/routing';
+import { useTranslations } from 'next-intl';
 
 
 const NotFoundPage = () => {
+  const t = useTranslations('NotFoundPage');
+
   return (
     <div className='w-full h-screen flex flex-col justify-center items-center gap-6'>
       <div className='w-full flex flex-col justify-center items-center gap-1'>
@@ -16,10 +19,10 @@ const NotFoundPage = () => {
           className='my-3' 
         />
         <p className='text-2xl text-gray-400 font-bold'>
-          Page not found
+          {t('mainMessage')}
         </p>
         <p className='text-lg text-gray-400 font-normal'>
-          Sorry, the page you are looking for cannot be found
+          {t('secondaryMessage')}
         </p>
       </div>
       <Link 
@@ -27,7 +30,7 @@ const NotFoundPage = () => {
         className='flex items-center'
       >
         <ArrowLeft className='mr-1' />
-        Go back to the home page
+        {t('backLink')}
       </Link>
     </div>
   );

@@ -36,6 +36,11 @@
     },
     "ResetPasswordPage": {
       "title": "Змінити пароль"
+    },
+    "userMenu": {
+      "signInBtnLabel": "Увійти",
+      "settingsLinkLabel": "Налаштування",
+      "logoutBtnLabel": "Вийти"
     }
   },
   "Dashboard": {

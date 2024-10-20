@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { RegisterForm } from '../_components/register-form';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { RegisterForm } from '../_components/register-form';
 
 
 const RegisterPage = () => {

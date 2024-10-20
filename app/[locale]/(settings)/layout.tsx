@@ -1,10 +1,10 @@
-import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import { useTranslations } from 'next-intl';
+import { getTranslations } from 'next-intl/server';
 import { LayoutGrid } from 'lucide-react';
 import { UserMenu } from '@/components/user-menu';
 import { getCurrentUser } from '@/lib/actions/user.actions';
 import { SettingsMenu } from './_components/settings-menu';
+import { Link } from '@/i18n/routing';
 
 
 interface ISettingsLayout {
@@ -13,7 +13,7 @@ interface ISettingsLayout {
 
 
 const SettingsLayout = async ({ children }: ISettingsLayout) => {
-  const t = useTranslations('Settings');
+  const t = await getTranslations('Settings');
   const { data, error } = await getCurrentUser();
 
   if (!data.user) {

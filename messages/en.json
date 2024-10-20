@@ -1,4 +1,9 @@
 {
+  "NotFoundPage": {
+    "mainMessage": "Page not found",
+    "secondaryMessage": "Sorry, the page you are looking for cannot be found",
+    "backLink": "Go back to the home page"
+  },
   "Auth": {
     "LoginForm": {
       "email": "Email",
@@ -36,6 +41,11 @@
     },
     "ResetPasswordPage": {
       "title": "Reset Password"
+    },
+    "userMenu": {
+      "signInBtnLabel": "Sign In",
+      "settingsLinkLabel": "Settings",
+      "logoutBtnLabel": "Log out"
     }
   },
   "Dashboard": {

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 import { LogOut, Settings } from 'lucide-react';
 import { User } from '@supabase/supabase-js';
 import {
@@ -10,6 +10,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { logout } from '@/lib/actions/auth.actions';
+import { Link } from '@/i18n/routing';
 
 
 interface IMenuDropdown {
@@ -18,6 +19,7 @@ interface IMenuDropdown {
 
 
 export const MenuDropdown = ({ user }: IMenuDropdown) => {
+  const t = useTranslations('Auth');
   return (
     <DropdownMenu>
       <DropdownMenuTrigger className='flex items-center'>
@@ -62,12 +64,12 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
         <DropdownMenuItem>
           <Link href={`/profile/${user.id}`} className='flex items-center font-medium text-base'>
             <Settings className='mr-3 w-5 h-5' />
-            Settings
+            {t('userMenu.settingsLinkLabel')}
           </Link>
         </DropdownMenuItem>
         <DropdownMenuItem className='font-medium text-base' onClick={() => logout()}>
           <LogOut className='mr-3 w-5 h-5' />
-          Log out
+          {t('userMenu.logoutBtnLabel')}
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

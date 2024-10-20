@@ -1,6 +1,6 @@
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 import { History, PanelsLeftBottom, Users } from 'lucide-react';
+import { Link } from '@/i18n/routing';
 
 
 interface ISettingsMenu {

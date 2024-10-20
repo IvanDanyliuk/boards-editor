@@ -1,4 +1,7 @@
 {
+  "NotFoundPage": {
+    "mainMessage": ""
+  },
   "Auth": {
     "LoginForm": {
       "email": "Adres e-mail",
@@ -36,6 +39,11 @@
     },
     "ResetPasswordPage": {
       "title": "Zresetuj hasło"
+    },
+    "userMenu": {
+      "signInBtnLabel": "Zalogować się",
+      "settingsLinkLabel": "Ustawienia",
+      "logoutBtnLabel": "Wyloguj się"
     }
   },
   "Dashboard": {

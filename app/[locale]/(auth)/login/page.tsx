@@ -1,6 +1,6 @@
-import Link from 'next/link';
-import { LoginForm } from '../_components/login-form';
 import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
+import { LoginForm } from '../_components/login-form';
 
 
 const LoginPage = () => {
