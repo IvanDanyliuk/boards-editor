@@ -106,6 +106,9 @@
     },
     "settingsLayout": {
       "backLink": "Przejdź do tablic"
+    },
+    "languageMenu": {
+      "formLabel": "Język"
     }
   }
 }

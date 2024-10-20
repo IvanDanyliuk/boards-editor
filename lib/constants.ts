@@ -153,3 +153,18 @@ export const PROFILE_IMAGE_MAX_FILE_SIZE = 1024 * 1024 * 3;   // 3MB
 export const PROFILE_IMAGE_FILE_TYPES = [
   'image/jpeg', 'image/jpg', 'image/png', 'image/svg',
 ];
+
+export const LANGUAGE_PARAMS = [
+  {
+    id: 'en',
+    name: 'English'
+  },
+  {
+    id: 'pl',
+    name: 'Polska'
+  },
+  {
+    id: 'ua',
+    name: 'Українська'
+  },
+];

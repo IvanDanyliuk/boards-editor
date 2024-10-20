@@ -44,8 +44,8 @@ export const FileInput = ({
     <div className='grid w-full items-center gap-1.5'>
       {label && (
         <Label htmlFor={name}>
-        {label}
-      </Label>
+          {label}
+        </Label>
       )}
       {(previewImageUrl) && (
         <div className='relative w-[50px] h-[50px]'>

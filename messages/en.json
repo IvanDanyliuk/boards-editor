@@ -106,6 +106,9 @@
     },
     "settingsLayout": {
       "backLink": "Go to boards"
+    },
+    "languageMenu": {
+      "formLabel": "Language"
     }
   }
 }

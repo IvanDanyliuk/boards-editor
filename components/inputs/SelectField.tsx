@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { Label } from '../ui/label';
 import { 
   Select, 
@@ -10,7 +11,7 @@ import {
 
 interface ISelectField {
   name: string;
-  label: string;
+  label?: string;
   options: {
     id: string;
     name: string;
@@ -18,6 +19,9 @@ interface ISelectField {
   placeholder?: string;
   value?: string;
   defaultValue?: string;
+  disabled?: boolean;
+  onChange?: (value: string) => void;
+  className?: string;
 };
 
 
@@ -27,17 +31,27 @@ export const SelectField = ({
   options, 
   placeholder, 
   value, 
-  defaultValue
+  defaultValue,
+  disabled,
+  onChange,
+  className
 }: ISelectField) => {
   return (
-    <div className='grid w-full items-center gap-1.5'>
-      <Label htmlFor={name}>
-        {label}
-      </Label>
+    <div className={clsx(
+      'grid items-center gap-1.5',
+      className || 'w-full'
+    )}>
+      {label && (
+        <Label htmlFor={name}>
+          {label}
+        </Label>
+      )}
       <Select 
         name={name} 
         value={value} 
+        disabled={disabled}
         defaultValue={defaultValue}
+        onValueChange={onChange}
       >
         <SelectTrigger>
           <SelectValue 
