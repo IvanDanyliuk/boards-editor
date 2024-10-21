@@ -168,6 +168,16 @@ export const updateEmail = async (prevState: any, formData: FormData) => {
 
   const supabase = createServerClient();
 
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+
+  if(userData && userData.user && userData.user.email === email) {
+    return {
+      error: {
+        email: ['This email is already used'],
+      },
+    };
+  }
+
   const { data, error } = await supabase.auth.updateUser({ email, data: { email } });
 
   if (error) {
@@ -182,6 +192,7 @@ export const updateEmail = async (prevState: any, formData: FormData) => {
 
   // revalidatePath('/', 'layout');
   if(data.user) {
+    console.log('SENT A LINK')
     return {
       success: `Verification link has been sent to ${email}. Check your email and follow instructions.`
     }

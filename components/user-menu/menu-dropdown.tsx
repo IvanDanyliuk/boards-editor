@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { logout } from '@/lib/actions/auth.actions';
 import { Link } from '@/i18n/routing';
+import { extractFirstLetters } from '@/lib/helpers';
 
 
 interface IMenuDropdown {
@@ -32,8 +33,11 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
               height={50} 
               className='rounded-full' 
             /> : 
-            <div className='w-[50px] h-[50px] flex justify-center items-center rounded-full font-semibold text-white' style={{ background: user.user_metadata.userColor }}>
-              {user.user_metadata.name.split(' ').map((char: string) => char[0]).slice(0, 2).join('').toUpperCase()}
+            <div 
+              className='w-[50px] h-[50px] flex justify-center items-center rounded-full font-semibold text-white' 
+              style={{ background: user.user_metadata.userColor }}
+            >
+              {extractFirstLetters(user.user_metadata.name)}
             </div>
           } 
         </div>
@@ -57,7 +61,7 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
               {user.user_metadata.name}
             </p>
             <p className='font-normal text-secondary-text'>
-              {user.user_metadata.email}
+              {user.email}
             </p>
           </div>
         </DropdownMenuLabel>
