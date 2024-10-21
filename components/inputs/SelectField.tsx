@@ -20,7 +20,7 @@ interface ISelectField {
   value?: string;
   defaultValue?: string;
   disabled?: boolean;
-  onChange?: (value: string) => void;
+  onChange?: (value: any) => void;
   className?: string;
 };
 

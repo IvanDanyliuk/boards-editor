@@ -6,6 +6,7 @@ import { useTranslations } from 'next-intl';
 import { SelectField } from '@/components/inputs/SelectField';
 import { useRouter, usePathname } from '@/i18n/routing';
 import { LANGUAGE_PARAMS } from '@/lib/constants';
+import { Language } from '@/lib/types';
 
 
 export const LanguageMenu = () => {
@@ -15,13 +16,11 @@ export const LanguageMenu = () => {
   const pathname = usePathname();
   const params = useParams();
 
-  const handleLanguageChange = (value: string) => {
+  const handleLanguageChange = (value: Language) => {
     startTransition(() => {
-      router.replace(
-        // @ts-expect-error
-        {pathname, params},
-        {locale: value}
-      );
+      router.replace(pathname, {
+        locale: value
+      });
     });
   };
 
