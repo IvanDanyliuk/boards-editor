@@ -122,6 +122,8 @@ export const register = async (prevState: any, formData: FormData) => {
         industry,
         role,
         userColor, 
+        invitationLinks: [],
+        teams: [],
         createdAt: new Date().toISOString()
       }
     }

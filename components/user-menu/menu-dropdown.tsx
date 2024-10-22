@@ -69,12 +69,18 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
           </div>
         </DropdownMenuLabel>
         <DropdownMenuItem>
-          <Link href={`/profile/${user.id}`} className='flex items-center font-medium text-base'>
+          <Link 
+            href={`/profile/${user.id}`} 
+            className='flex items-center font-medium text-base'
+          >
             <Settings className='mr-3 w-5 h-5' />
             {t('userMenu.settingsLinkLabel')}
           </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem className='font-medium text-base' onClick={() => logout()}>
+        <DropdownMenuItem 
+          className='font-medium text-base' 
+          onClick={() => logout()}
+        >
           <LogOut className='mr-3 w-5 h-5' />
           {t('userMenu.logoutBtnLabel')}
         </DropdownMenuItem>
