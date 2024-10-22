@@ -1,0 +1,114 @@
+{
+  "NotFoundPage": {
+    "mainMessage": "Strona nie znaleziona",
+    "secondaryMessage": "Przepraszamy, strona, której szukasz, nie została znaleziona",
+    "backLink": "Wróć do strony głównej"
+  },
+  "Auth": {
+    "LoginForm": {
+      "email": "Adres e-mail",
+      "password": "Hasło",
+      "submitBtn": "Potwierdź"
+    },
+    "RegisterForm": {
+      "name": "Nazwa",
+      "email": "Adres e-mail",
+      "password": "Hasło",
+      "confirmPassword": "Potwierdź hasło",
+      "imageUrl": "Obraz profilowy",
+      "company": "Firma",
+      "industry": "Przemysł",
+      "role": "Rola",
+      "submitBtn": "Potwierdź"
+    },
+    "ResetPasswordForm": {
+      "newPassword": "Nowe hasło",
+      "confirmNewPassword": "Potwierdź nowe hasło",
+      "submitBtnLabel": "Potwierdź",
+      "cancelBtnLabel": "Anulować"
+    },
+    "LoginPage": {
+      "title": "Zalogować się",
+      "or": "albo",
+      "noAccountText": "Nie masz jeszcze konta w serwisie?",
+      "signUpLinkLabel": "Zarejestruj się"
+    },
+    "RegisterPage": {
+      "title": "Utwórz konto",
+      "or": "albo",
+      "accountPresentText": "Masz już konto?",
+      "signInLinkLabel": "Zaloguj się"
+    },
+    "ResetPasswordPage": {
+      "title": "Zresetuj hasło"
+    },
+    "userMenu": {
+      "signInBtnLabel": "Zalogować się",
+      "settingsLinkLabel": "Ustawienia",
+      "logoutBtnLabel": "Wyloguj się"
+    }
+  },
+  "Dashboard": {
+    "sidebar": {
+      "recentBoards": "Ostatnie tablice",
+      "starredBoards": "Oznaczone tablice"
+    },
+    "templates": {
+      "openDialogBtnLabel": "Szablony",
+      "dialogMenuItem1": "Wszystkie szablony",
+      "dialogMenuItem2": "Ostatni",
+      "dialogMenuItem3": "Popularny"
+    },
+    "StarredBoardsPage": {
+
+    },
+    "DashboardMainPage": {
+      
+    }
+  },
+  "Settings": {
+    "profileImageForm": {
+      "formLabel": "Zdjęcie profilowe",
+      "uploadBtnLabel": "Wgrywać",
+      "removeBtnLabel": "Usunąć"
+    },
+    "profileSettingsForm": {
+      "name": "Nazwa",
+      "company": "Firma",
+      "industry": "Przemysł",
+      "role": "Rola",
+      "submitBtnLabel": "Potwierdź"
+    },
+    "settingsMenu": {
+      "link1": "Ustawienia profilu",
+      "link2": "Profil zespołu",
+      "link3": "Użytkownicy zespołu"
+    },
+    "updateEmailForm": {
+      "formLabel": "Adres e-mail",
+      "openDialogBtnLabel": "Redagować",
+      "dialogTitle": "Aktualizuj e-mail",
+      "textFieldLabel": "Adres e-mail",
+      "submitBtnLabel": "Potwierdź"
+    },
+    "updatePasswordForm": {
+      "formLabel": "Hasło",
+      "actionBtnLabel": "Aktualizacja"
+    },
+    "teamProfile": {
+
+    },
+    "teamUsers": {
+
+    },
+    "profilePage": {
+
+    },
+    "settingsLayout": {
+      "backLink": "Przejdź do tablic"
+    },
+    "languageMenu": {
+      "formLabel": "Język"
+    }
+  }
+}
