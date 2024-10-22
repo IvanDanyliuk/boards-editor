@@ -16,7 +16,7 @@ export const teams = pgTable('teams', {
   id: uuid('id').primaryKey().notNull(),
   name: text('name').notNull().unique(),
   teamLogo: text('team_logo'),
-  userIds: uuid('user_ids').notNull(),
+  memberIds: uuid('user_ids').notNull(),
   projectIds: uuid('user_ids').notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });

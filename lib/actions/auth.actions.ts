@@ -115,7 +115,6 @@ export const register = async (prevState: any, formData: FormData) => {
     password: password as string,
     options: {
       data: {
-        id: crypto.randomUUID(),
         name,
         imageUrl: profileImage ? profileImage?.imageUrl : '',
         company,
