@@ -16,8 +16,8 @@ const teamSchema = zod.object({
   profilePhoto: zod
     .instanceof(File)
     .optional()
-    .refine(file => !file || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
-    .refine(file => file && file.size === 0 || file && PROFILE_IMAGE_FILE_TYPES.includes(file?.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
+    .refine(file => !file || file.size !== 0 || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
+    .refine(file => !file || file.type === '' || PROFILE_IMAGE_FILE_TYPES.includes(file.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
 });
 
 
@@ -210,7 +210,7 @@ export const createTeam = async (prevState: any, formData: FormData) => {
   } catch (error: any) {
     return {
       error: {
-        uploadUserImage: [error.message]
+        team: [error.message]
       }
     }
   }

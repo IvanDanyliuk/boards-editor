@@ -10,10 +10,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { Plus } from 'lucide-react';
+import { createTeam } from '@/lib/actions/team.actions';
+import { CircleAlert, Plus } from 'lucide-react';
+import { useEffect } from 'react';
+import { useFormState } from 'react-dom';
+import { toast } from 'sonner';
+
+
+const initialState = {
+  name: '',
+  teamLogo: '',
+};
 
 
 export const CreateTeamForm = () => {
+  const [state, formAction] = useFormState<any, any>(createTeam, initialState);
+
+  useEffect(() => {
+    if(state && state.error) {
+      Object.values(state.error).forEach((error: any) => toast(error.join('. '), {
+        className: 'text-red-500',
+        icon: <CircleAlert />
+      }));
+    }
+  }, [state, formAction]);
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -26,13 +47,11 @@ export const CreateTeamForm = () => {
           <DialogTitle>Create a team</DialogTitle>
           
         </DialogHeader>
-        <form action="">
+        <form action={formAction} className='flex flex-col gap-3'>
           <TextField name='name' label='Team name' />
           <FileInput name='teamLogo' label='Team logo' />
+          <Button type='submit'>Create</Button>
         </form>
-        <DialogFooter>
-          <Button type="submit">Save changes</Button>
-        </DialogFooter>
       </DialogContent>
     </Dialog>
   );

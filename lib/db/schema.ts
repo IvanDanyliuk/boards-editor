@@ -1,29 +1,15 @@
 import { pgTable, uuid, text, timestamp } from 'drizzle-orm/pg-core';
 
 
-// export const users = pgTable('users', {
-//   id: uuid('id').primaryKey().notNull(),
-//   name: text('name').notNull().unique(),
-//   email: text('email').notNull().unique(),
-//   imageUrl: text('image_url'),
-//   role: text('role').notNull(),
-//   company: text('company'),
-//   industry: text('industry').notNull(),
-//   createdAt: timestamp('created_at').defaultNow().notNull(),
-// });
-
 export const teams = pgTable('teams', {
   id: uuid('id').primaryKey().notNull(),
   name: text('name').notNull().unique(),
   teamLogo: text('team_logo'),
-  teamColor: text('teamColor'),
+  teamColor: text('teamColor').notNull(),
   memberIds: text('user_ids').array().notNull(),
   projectIds: uuid('user_ids').array().notNull(),
   createdAt: text('created_at').notNull(),
 });
 
-// export type InsertUser = typeof users.$inferInsert;
-// export type SelectUser = typeof users.$inferSelect;
-
-// export type InsertTeam = typeof teams.$inferInsert;
+export type InsertTeam = typeof teams.$inferInsert;
 export type SelectTeam = typeof teams.$inferSelect;

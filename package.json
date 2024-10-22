@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate": "npx drizzle-kit generate && npx tsx db/migrate.ts"
+    "migrate": "npx drizzle-kit generate && npx tsx lib/db/migrate.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
