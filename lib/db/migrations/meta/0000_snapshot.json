@@ -1,5 +1,5 @@
 {
-  "id": "4d04ffaa-a884-49d6-b53c-3940847c8826",
+  "id": "91e120fd-54e8-4a15-bfd3-0c7b1640559c",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -30,7 +30,7 @@
           "name": "teamColor",
           "type": "text",
           "primaryKey": false,
-          "notNull": false
+          "notNull": true
         },
         "user_ids": {
           "name": "user_ids",

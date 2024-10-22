@@ -7,11 +7,11 @@ import dotenv from 'dotenv';
 dotenv.config({ path: '.env.local' });
 
 
-const migrationClient = postgres(process.env.DB_CONNECTION_STRING!, { max: 1 });
+const migrationClient = postgres(process.env.DB_CONNECTION_STRING as string, { max: 1 });
 
 const main = async () => {
   await migrate(drizzle(migrationClient), {
-    migrationsFolder: './migrations'
+    migrationsFolder: './lib/db/migrations'
   });
   
   await migrationClient.end();

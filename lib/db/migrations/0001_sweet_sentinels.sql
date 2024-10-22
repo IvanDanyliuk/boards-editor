@@ -1,1 +1,0 @@
-ALTER TABLE "teams" ALTER COLUMN "teamColor" SET NOT NULL;

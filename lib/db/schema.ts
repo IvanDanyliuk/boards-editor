@@ -1,4 +1,4 @@
-import { pgTable, uuid, text, timestamp } from 'drizzle-orm/pg-core';
+import { pgTable, uuid, text } from 'drizzle-orm/pg-core';
 
 
 export const teams = pgTable('teams', {
