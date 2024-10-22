@@ -1,5 +1,24 @@
+'use server';
+
 import { revalidatePath } from 'next/cache';
+import { z as zod } from 'zod';
+import db from '../db';
 import createBrowserClient from '../db/clients/browser';
+import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
+import { createServerClient } from '../db/clients/server';
+import { teams } from '../db/schema';
+import { getRandomHexColor } from '../helpers';
+import { uploadImage } from '../db/storage/client';
+
+
+const teamSchema = zod.object({
+  name: zod.string().min(1, 'Name is required').max(100),
+  profilePhoto: zod
+    .instanceof(File)
+    .optional()
+    .refine(file => !file || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
+    .refine(file => file && file.size === 0 || file && PROFILE_IMAGE_FILE_TYPES.includes(file?.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
+});
 
 
 export const inviteUser = async ({ userId, teamId }: { userId: string, teamId: string }) => {
@@ -150,3 +169,49 @@ export const leaveTeam = async (teamId: string) => {
 
   revalidatePath('/', 'layout');
 };
+
+export const createTeam = async (prevState: any, formData: FormData) => {
+  try {
+    const name = formData.get('name') as string;
+    const teamLogo = formData.get('teamLogo') as any;
+
+    const validatedFields = teamSchema.safeParse({
+      name, teamLogo
+    });
+
+    if (!validatedFields.success) {
+      return {
+        error: validatedFields.error.flatten().fieldErrors,
+      };
+    };
+
+    const uploadedTeamLogo = teamLogo.size !== 0 ? await uploadImage({
+      file: teamLogo,
+      bucket: process.env.SUPABASE_STORAGE_BUCKET!,
+    }) : null;
+
+    if(uploadedTeamLogo && uploadedTeamLogo.message) {
+      throw new Error(uploadedTeamLogo.message)
+    }
+
+    const teamLogoUrl = uploadedTeamLogo ? uploadedTeamLogo.imageUrl : '';
+
+    await db.insert(teams).values({
+      id: crypto.randomUUID(),
+      name,
+      teamColor: getRandomHexColor(),
+      teamLogo: teamLogoUrl,
+      memberIds: [],
+      projectIds: [],
+      createdAt: new Date().toISOString(),
+    });
+
+    revalidatePath('/', 'layout');
+  } catch (error: any) {
+    return {
+      error: {
+        uploadUserImage: [error.message]
+      }
+    }
+  }
+}

@@ -16,13 +16,14 @@ export const teams = pgTable('teams', {
   id: uuid('id').primaryKey().notNull(),
   name: text('name').notNull().unique(),
   teamLogo: text('team_logo'),
-  memberIds: uuid('user_ids').notNull(),
-  projectIds: uuid('user_ids').notNull(),
-  createdAt: timestamp('created_at').defaultNow().notNull(),
+  teamColor: text('teamColor'),
+  memberIds: text('user_ids').array().notNull(),
+  projectIds: uuid('user_ids').array().notNull(),
+  createdAt: text('created_at').notNull(),
 });
 
 // export type InsertUser = typeof users.$inferInsert;
 // export type SelectUser = typeof users.$inferSelect;
 
-export type InsertTeam = typeof teams.$inferInsert;
+// export type InsertTeam = typeof teams.$inferInsert;
 export type SelectTeam = typeof teams.$inferSelect;
