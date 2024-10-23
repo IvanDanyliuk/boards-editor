@@ -203,15 +203,14 @@ export const createTeam = async (prevState: any, formData: FormData) => {
       teamLogo: teamLogoUrl,
       memberIds: [],
       projectIds: [],
-      createdAt: new Date().toISOString(),
     });
 
     revalidatePath('/', 'layout');
   } catch (error: any) {
     return {
       error: {
-        team: [error.message]
-      }
-    }
+        team: [error.message],
+      },
+    };
   }
 }

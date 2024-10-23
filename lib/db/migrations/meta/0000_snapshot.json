@@ -1,5 +1,5 @@
 {
-  "id": "91e120fd-54e8-4a15-bfd3-0c7b1640559c",
+  "id": "bd29a7bc-557a-445c-8a14-76a9ef7a082b",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,8 +10,8 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
+          "type": "text",
+          "primaryKey": false,
           "notNull": true
         },
         "name": {
@@ -32,17 +32,24 @@
           "primaryKey": false,
           "notNull": true
         },
-        "user_ids": {
-          "name": "user_ids",
+        "member_ids": {
+          "name": "member_ids",
           "type": "uuid[]",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "project_ids": {
+          "name": "project_ids",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": true
         },
         "created_at": {
           "name": "created_at",
-          "type": "text",
+          "type": "timestamp",
           "primaryKey": false,
-          "notNull": true
+          "notNull": true,
+          "default": "now()"
         }
       },
       "indexes": {},
