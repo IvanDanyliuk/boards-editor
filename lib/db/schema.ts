@@ -2,11 +2,11 @@ import { pgTable, uuid, text, timestamp } from 'drizzle-orm/pg-core';
 
 
 export const teams = pgTable('teams', {
-  id: text('id').notNull(),
+  id: uuid('id').primaryKey(),
   name: text('name').notNull().unique(),
   teamLogo: text('team_logo'),
   teamColor: text('teamColor').notNull(),
-  memberIds: uuid('member_ids').array().notNull(),
+  memberIds: text('member_ids').array().notNull(),
   projectIds: text('project_ids').array().notNull(),
   createdAt: timestamp('created_at').defaultNow().notNull(),
 });

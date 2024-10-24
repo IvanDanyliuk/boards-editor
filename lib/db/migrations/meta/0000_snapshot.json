@@ -1,5 +1,5 @@
 {
-  "id": "bd29a7bc-557a-445c-8a14-76a9ef7a082b",
+  "id": "15a823e0-1948-467e-9573-a0899dd35af8",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -10,8 +10,8 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
-          "primaryKey": false,
+          "type": "uuid",
+          "primaryKey": true,
           "notNull": true
         },
         "name": {
@@ -34,7 +34,7 @@
         },
         "member_ids": {
           "name": "member_ids",
-          "type": "uuid[]",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": true
         },

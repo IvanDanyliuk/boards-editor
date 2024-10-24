@@ -5,10 +5,10 @@ import { z as zod } from 'zod';
 import db from '../db';
 import createBrowserClient from '../db/clients/browser';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
-import { createServerClient } from '../db/clients/server';
 import { teams } from '../db/schema';
 import { getRandomHexColor } from '../helpers';
 import { uploadImage } from '../db/storage/client';
+import { createServerClient } from '../db/clients/server';
 
 
 const teamSchema = zod.object({
@@ -22,7 +22,7 @@ const teamSchema = zod.object({
 
 
 export const inviteUser = async ({ userId, teamId }: { userId: string, teamId: string }) => {
-  const supabase = createBrowserClient();
+  const supabase = createServerClient();
   const { data: userData, error: userError } = await supabase.auth.admin.getUserById(userId);
 
   if(userError) {
@@ -51,7 +51,7 @@ export const inviteUser = async ({ userId, teamId }: { userId: string, teamId: s
 };
 
 export const acceptInvitation = async (teamId: string) => {
-  const supabase = createBrowserClient();
+  const supabase = createServerClient();
   const { data: userData, error: userError } = await supabase.auth.getUser();
 
   if(userError) {
@@ -93,7 +93,7 @@ export const acceptInvitation = async (teamId: string) => {
 };
 
 export const rejectInvitation = async (teamId: string) => {
-  const supabase = createBrowserClient();
+  const supabase = createServerClient();
   const { data: userData, error: userError } = await supabase.auth.getUser();
 
   if(userError) {
@@ -130,7 +130,7 @@ export const rejectInvitation = async (teamId: string) => {
 };
 
 export const leaveTeam = async (teamId: string) => {
-  const supabase = createBrowserClient();
+  const supabase = createServerClient();
   const { data: userData, error: userError } = await supabase.auth.getUser();
 
   if(userError) {
@@ -185,6 +185,17 @@ export const createTeam = async (prevState: any, formData: FormData) => {
       };
     };
 
+    const supabase = createServerClient();
+    const { data, error } = await supabase.auth.getUser();
+
+    if(error) {
+      return {
+        error: {
+          getUserError: [error.message],
+        },
+      };
+    }
+
     const uploadedTeamLogo = teamLogo.size !== 0 ? await uploadImage({
       file: teamLogo,
       bucket: process.env.SUPABASE_STORAGE_BUCKET!,
@@ -201,7 +212,7 @@ export const createTeam = async (prevState: any, formData: FormData) => {
       name,
       teamColor: getRandomHexColor(),
       teamLogo: teamLogoUrl,
-      memberIds: [],
+      memberIds: [data.user.id],
       projectIds: [],
     });
 
@@ -213,4 +224,8 @@ export const createTeam = async (prevState: any, formData: FormData) => {
       },
     };
   }
-}
+};
+
+export const fetchTeams = async (userId: string) => {
+
+};
