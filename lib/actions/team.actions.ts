@@ -1,9 +1,9 @@
 'use server';
 
 import { revalidatePath } from 'next/cache';
+import { eq } from 'drizzle-orm';
 import { z as zod } from 'zod';
 import db from '../db';
-import createBrowserClient from '../db/clients/browser';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
 import { teams } from '../db/schema';
 import { getRandomHexColor } from '../helpers';
@@ -227,5 +227,18 @@ export const createTeam = async (prevState: any, formData: FormData) => {
 };
 
 export const fetchTeams = async (userId: string) => {
-
+  try {
+    const userTeams = await db.select().from(teams).where(eq(teams.memberIds, [userId]));
+    return {
+      data: userTeams,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      data: [],
+      error: {
+        fetchTeams: [error.message],
+      },
+    };
+  }
 };

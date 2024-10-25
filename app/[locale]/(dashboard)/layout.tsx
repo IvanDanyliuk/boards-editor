@@ -3,6 +3,7 @@ import { getCurrentUser } from '@/lib/actions/user.actions';
 import { Sidebar } from './_components/sidebar';
 import { UserMenu } from '../../../components/user-menu';
 import { Searchbar } from './_components/search-bar';
+import { fetchTeams } from '@/lib/actions/team.actions';
 
 
 interface IDashboardLayout  {
@@ -12,6 +13,8 @@ interface IDashboardLayout  {
 
 const DashboardLayout = async ({ children }: IDashboardLayout) => {
   const { data, error } = await getCurrentUser();
+  const fetchedTeams = data.user ? await fetchTeams(data.user?.id) : null;
+  const teams = fetchedTeams ? fetchedTeams : null;
 
   if (!data.user) {
     redirect('/login');
@@ -19,8 +22,12 @@ const DashboardLayout = async ({ children }: IDashboardLayout) => {
 
   return (
     <main className='h-full'>
-      <Sidebar />
-      <div className='pl-[230px] flex-1 h-screen bg-page-bg'>
+      {
+        teams && (
+          <Sidebar teams={teams} />
+        )
+      }
+      <div className='pl-[236px] flex-1 h-screen bg-page-bg'>
         <div className='px-3 h-[80px] flex justify-between items-center bg-amber-500'>
           <Searchbar />
           <UserMenu 
