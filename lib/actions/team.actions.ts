@@ -9,6 +9,7 @@ import { teams } from '../db/schema';
 import { getRandomHexColor } from '../helpers';
 import { uploadImage } from '../db/storage/client';
 import { createServerClient } from '../db/clients/server';
+import { redirect } from 'next/navigation';
 
 
 const teamSchema = zod.object({
@@ -217,6 +218,7 @@ export const createTeam = async (prevState: any, formData: FormData) => {
     });
 
     revalidatePath('/', 'layout');
+    redirect('/');
   } catch (error: any) {
     return {
       error: {

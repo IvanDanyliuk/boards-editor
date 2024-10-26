@@ -137,7 +137,7 @@ export const register = async (prevState: any, formData: FormData) => {
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/create-team');
 };
 
 export const logout = async () => {

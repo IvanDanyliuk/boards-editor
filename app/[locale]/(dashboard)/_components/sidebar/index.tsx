@@ -7,9 +7,9 @@ import { CircleAlert, Clock, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from '@/i18n/routing';
 import { Templates } from '../templates';
-import { CreateTeamForm } from './create-team-form';
 import { Team } from '@/lib/types';
 import { extractFirstLetters } from '@/lib/helpers';
+import { CreateTeamModal } from './create-team-modal';
 
 
 interface ISidebar {
@@ -36,11 +36,17 @@ export const Sidebar = ({ teams }: ISidebar) => {
   return (
     <aside className='fixed h-full flex'>
       <div className='w-[56px] h-full px-1.5 py-2 flex flex-col items-center gap-1.5 bg-secondary-bg'>
-        <CreateTeamForm />
+        <CreateTeamModal />
         <ul className='flex flex-col gap-1.5'>
           {teams.data.map(team => (
-            <li key={crypto.randomUUID()} className='w-10 h-10 flex justify-center items-center rounded-md overflow-hidden' style={{ background: team.teamColor }}>
-              <Link href={`/teams/${team.id}`} className='w-full h-fit text-center font-semibold'>
+            <li 
+              key={crypto.randomUUID()} 
+              className='w-10 h-10 flex justify-center items-center rounded-md overflow-hidden hover:opacity-55 transition-opacity duration-100' 
+              style={{ background: team.teamColor }}>
+              <Link 
+                href={`/teams/${team.id}`} 
+                className='w-full h-fit text-center font-semibold'
+              >
                 {extractFirstLetters(team.name)}
               </Link>
             </li>
