@@ -211,6 +211,7 @@ export const createTeam = async (prevState: any, formData: FormData) => {
     await db.insert(teams).values({
       id: crypto.randomUUID(),
       name,
+      admin: data.user.id,
       teamColor: getRandomHexColor(),
       teamLogo: teamLogoUrl,
       memberIds: [data.user.id],
