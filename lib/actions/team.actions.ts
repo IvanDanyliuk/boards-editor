@@ -10,6 +10,7 @@ import { getRandomHexColor } from '../helpers';
 import { uploadImage } from '../db/storage/client';
 import { createServerClient } from '../db/clients/server';
 import { redirect } from 'next/navigation';
+import { cookies } from 'next/headers';
 
 
 const teamSchema = zod.object({
@@ -207,9 +208,10 @@ export const createTeam = async (prevState: any, formData: FormData) => {
     }
 
     const teamLogoUrl = uploadedTeamLogo ? uploadedTeamLogo.imageUrl : '';
+    const teamId = crypto.randomUUID();
 
     await db.insert(teams).values({
-      id: crypto.randomUUID(),
+      id: teamId,
       name,
       admin: data.user.id,
       teamColor: getRandomHexColor(),
@@ -218,8 +220,9 @@ export const createTeam = async (prevState: any, formData: FormData) => {
       projectIds: [],
     });
 
+    cookies().set('currentTeam', teamId);
+
     revalidatePath('/', 'layout');
-    redirect('/');
   } catch (error: any) {
     return {
       error: {
