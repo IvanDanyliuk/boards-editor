@@ -30,7 +30,7 @@ export const TeamsMenu = ({ teams }: ITeamsMenu) => {
   if(teams.length === 0) {
     return (
       <div>No teams</div>
-    )
+    );
   }
   
   return (

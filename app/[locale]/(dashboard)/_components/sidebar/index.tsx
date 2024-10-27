@@ -10,7 +10,7 @@ import { Templates } from '../templates';
 import { Team } from '@/lib/types';
 import { extractFirstLetters } from '@/lib/helpers';
 import { CreateTeamModal } from './create-team-modal';
-import { TeamsMenu } from './teams-menu';
+import { TeamsMenu } from '../../../../../components/teams-menu';
 
 
 interface ISidebar {
@@ -18,7 +18,7 @@ interface ISidebar {
     data: Team[];
     error: any;
   };
-}
+};
 
 
 export const Sidebar = ({ teams }: ISidebar) => {

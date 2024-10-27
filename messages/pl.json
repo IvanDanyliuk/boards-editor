@@ -95,8 +95,12 @@
       "formLabel": "Hasło",
       "actionBtnLabel": "Aktualizacja"
     },
+    "teamSettingsForm": {
+      "name": "Nazwa",
+      "submitBtnLabel": "Potwierdź"
+    },
     "teamProfile": {
-
+      "title": "Profil zespołu"
     },
     "teamUsers": {
 

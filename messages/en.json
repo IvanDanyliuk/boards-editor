@@ -95,8 +95,12 @@
       "formLabel": "Password",
       "actionBtnLabel": "Update"
     },
+    "teamSettingsForm": {
+      "name": "Name",
+      "submitBtnLabel": "Submit"
+    },
     "teamProfile": {
-
+      "title": "Team profile"
     },
     "teamUsers": {
 

@@ -95,8 +95,12 @@
       "formLabel": "Пароль",
       "actionBtnLabel": "Оновити"
     },
+    "teamSettingsForm": {
+      "name": "Ім'я",
+      "submitBtnLabel": "Підтвердити"
+    },
     "teamProfile": {
-
+      "title": "Профіль команди"
     },
     "teamUsers": {
 

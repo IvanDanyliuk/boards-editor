@@ -241,7 +241,7 @@ export const fetchTeams = async (userId: string) => {
     };
   } catch (error: any) {
     return {
-      data: [],
+      data: null,
       error: {
         fetchTeams: [error.message],
       },
@@ -249,6 +249,31 @@ export const fetchTeams = async (userId: string) => {
   }
 };
 
+export const fetchCurrentTeam = async (teamId: string) => {
+  try {
+    // const team = await db.select().from(teams).where(eq(teams.id, teamId)).limit(1);
+    const team = await db.query.teams.findFirst({
+      where: (teams, { eq }) => eq(teams.id, teamId)
+    })
+
+    return {
+      data: team,
+      error: null,
+    };
+  } catch (error: any) {
+    return {
+      data: null,
+      error: {
+        fetchCurrenTeam: [error.message],
+      },
+    };
+  }
+};
+
 export const setCurrentTeam = (teamId: string) => {
   cookies().set('currentTeam', teamId);
+};
+
+export const updateTeamData = async (prevState: any, formData: FormData) => {
+
 };
