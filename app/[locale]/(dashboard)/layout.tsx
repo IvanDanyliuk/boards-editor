@@ -11,11 +11,16 @@ interface IDashboardLayout  {
   children: React.ReactNode;
 };
 
+const teamsEmptyState = {
+  data: [],
+  error: null
+};
+
 
 const DashboardLayout = async ({ children }: IDashboardLayout) => {
   const { data, error } = await getCurrentUser();
   const fetchedTeams = data.user ? await fetchTeams(data.user?.id) : null;
-  const teams = fetchedTeams ? fetchedTeams : null;
+  const teams = fetchedTeams ? fetchedTeams : teamsEmptyState;
 
   if (!data.user) {
     redirect('/login');
@@ -23,11 +28,7 @@ const DashboardLayout = async ({ children }: IDashboardLayout) => {
 
   return (
     <main className='h-full'>
-      {
-        teams && (
-          <Sidebar teams={teams} />
-        )
-      }
+      <Sidebar teams={teams} />
       <div className='pl-[236px] flex-1 h-screen bg-page-bg'>
         <div className='px-3 h-[80px] flex justify-between items-center bg-amber-500'>
           <Searchbar />

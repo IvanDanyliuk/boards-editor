@@ -1,19 +1,16 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useTranslations } from 'next-intl';
-import { getCookie } from 'cookies-next';
-import { CircleAlert, Clock, Star, ChevronsUpDown } from 'lucide-react';
+import { CircleAlert, Clock, Star } from 'lucide-react';
 import { toast } from 'sonner';
-import clsx from 'clsx';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Link } from '@/i18n/routing';
 import { Templates } from '../templates';
 import { Team } from '@/lib/types';
 import { extractFirstLetters } from '@/lib/helpers';
 import { CreateTeamModal } from './create-team-modal';
-import { setCurrentTeam } from '@/lib/actions/team.actions';
+import { TeamsMenu } from './teams-menu';
 
 
 interface ISidebar {
@@ -28,17 +25,7 @@ export const Sidebar = ({ teams }: ISidebar) => {
   const t = useTranslations('Dashboard');
   const pathname = usePathname();
 
-  // const currentTeamId = getCookie('currentTeam');
-  // const [currentTeamName, setCurrentTeamName] = useState('No teams');
-
   useEffect(() => {
-    // if(teams.data.length > 0) {
-    //   const currentTeam = teams.data.find(team => team.id === currentTeamId);
-    //   if(currentTeam) {
-    //     setCurrentTeamName(currentTeam.name);
-    //   }
-    // }
-
     if(teams.error) {
       Object.values(teams.error).forEach((error: any) => toast(error.join('. '), {
         className: 'text-red-500',
@@ -86,26 +73,7 @@ export const Sidebar = ({ teams }: ISidebar) => {
             {t('sidebar.starredBoards')}
           </span>
         </Link>
-        {/* {teams.data.length > 0 ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger className='flex justify-between items-center text-left'>
-              {currentTeamName}
-            </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              {teams.data.map(team => (
-                <DropdownMenuItem 
-                  key={crypto.randomUUID()} 
-                  onClick={() => setCurrentTeam(team.id)}
-                  className={clsx('bg-white', team.id === currentTeamId && 'bg-slate-400')}
-                >
-                  {team.name}
-                </DropdownMenuItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-        ) : (
-          <div>No teams</div>
-        )} */}
+        <TeamsMenu teams={teams.data} />
         <Templates />
       </div>
     </aside>

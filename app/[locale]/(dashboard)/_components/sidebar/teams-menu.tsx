@@ -1,12 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { getCookie } from 'cookies-next';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
-import { Team } from '@/lib/types';
 import clsx from 'clsx';
 import { ChevronsUpDown } from 'lucide-react';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
+import { Team } from '@/lib/types';
 import { setCurrentTeam } from '@/lib/actions/team.actions';
-import { useEffect, useState } from 'react';
 
 
 interface ITeamsMenu {
@@ -35,8 +35,9 @@ export const TeamsMenu = ({ teams }: ITeamsMenu) => {
   
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className='flex justify-between items-center text-left'>
+      <DropdownMenuTrigger className='px-3 py-2 flex justify-between items-center text-sm text-left font-semibold border border-spacing-1 rounded-md'>
         {currentTeamName}
+        <ChevronsUpDown className='w-5 h-3' />
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         {teams.map(team => (
