@@ -248,3 +248,7 @@ export const fetchTeams = async (userId: string) => {
     };
   }
 };
+
+export const setCurrentTeam = (teamId: string) => {
+  cookies().set('currentTeam', teamId);
+};

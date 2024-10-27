@@ -4,6 +4,7 @@ import { Sidebar } from './_components/sidebar';
 import { UserMenu } from '../../../components/user-menu';
 import { Searchbar } from './_components/search-bar';
 import { fetchTeams } from '@/lib/actions/team.actions';
+import { cookies } from 'next/headers';
 
 
 interface IDashboardLayout  {
