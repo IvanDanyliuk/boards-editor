@@ -20,9 +20,13 @@ export const TeamsMenu = ({ teams }: ITeamsMenu) => {
 
   useEffect(() => {
     if(teams.length > 0) {
-      const currentTeam = teams.find(team => team.id === currentTeamId);
-      if(currentTeam) {
-        setCurrentTeamName(currentTeam.name);
+      if(currentTeamId) {
+        const currentTeam = teams.find(team => team.id === currentTeamId);
+        if(currentTeam) {
+          setCurrentTeamName(currentTeam.name);
+        }
+      } else {
+        setCurrentTeamName(teams[0].name);
       }
     }
   }, [teams, currentTeamId])
