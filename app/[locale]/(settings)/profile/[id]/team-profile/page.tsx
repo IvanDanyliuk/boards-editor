@@ -1,20 +1,27 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { fetchCurrentTeam } from '@/lib/actions/team.actions';
+import { fetchCurrentTeam, fetchTeams, setCurrentTeam } from '@/lib/actions/team.actions';
 import { Separator } from '@/components/ui/separator';
 import { getTranslations } from 'next-intl/server';
 import { TeamSettingsForm } from '../../../_components/team-settings-form';
+import { setCookie } from 'cookies-next';
 
 
-const TeamProfilePage = async () => {
+const TeamProfilePage = async ({ params: { id } }: { params: { id: string } }) => {
   const t = await getTranslations('Settings');
 
   const currentTeamId = cookies().get('currentTeam');
+
+  // if(!currentTeamId) {
+  //   const teams = await fetchTeams(id);
+  //   if(teams.data && teams.data.length > 0) {
+  //     setCookie('currentTeam', teams.data[0].id)
+  //   }
+  // }
+
   const currentTeam = currentTeamId ? 
     await fetchCurrentTeam(currentTeamId.value) : 
     null;
-
-  console.log('TEAM SETTINGS', currentTeam)
 
   if(!currentTeam) {
     redirect('/create-team');

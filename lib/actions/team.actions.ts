@@ -251,7 +251,6 @@ export const fetchTeams = async (userId: string) => {
 
 export const fetchCurrentTeam = async (teamId: string) => {
   try {
-    // const team = await db.select().from(teams).where(eq(teams.id, teamId)).limit(1);
     const team = await db.query.teams.findFirst({
       where: (teams, { eq }) => eq(teams.id, teamId)
     })
@@ -272,6 +271,7 @@ export const fetchCurrentTeam = async (teamId: string) => {
 
 export const setCurrentTeam = (teamId: string) => {
   cookies().set('currentTeam', teamId);
+  revalidatePath('/', 'layout');
 };
 
 export const updateTeamData = async (prevState: any, formData: FormData) => {

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { getCookie } from 'cookies-next';
+import { getCookie, setCookie } from 'cookies-next';
 import clsx from 'clsx';
 import { ChevronsUpDown } from 'lucide-react';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
@@ -27,6 +27,7 @@ export const TeamsMenu = ({ teams }: ITeamsMenu) => {
         }
       } else {
         setCurrentTeamName(teams[0].name);
+        setCookie('currentTeam', teams[0].id);
       }
     }
   }, [teams, currentTeamId])
