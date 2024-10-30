@@ -12,12 +12,14 @@ const TeamProfilePage = async ({ params: { id } }: { params: { id: string } }) =
 
   const currentTeamId = cookies().get('currentTeam');
 
-  // if(!currentTeamId) {
-  //   const teams = await fetchTeams(id);
-  //   if(teams.data && teams.data.length > 0) {
-  //     setCookie('currentTeam', teams.data[0].id)
-  //   }
-  // }
+  if(!currentTeamId) {
+    const teams = await fetchTeams(id);
+    if(teams.data && teams.data.length > 0) {
+      setCookie('currentTeam', teams.data[0].id);
+    } else {
+      redirect('/create-team');
+    }
+  }
 
   const currentTeam = currentTeamId ? 
     await fetchCurrentTeam(currentTeamId.value) : 
