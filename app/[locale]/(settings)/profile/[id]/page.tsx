@@ -6,13 +6,7 @@ import { UpdateEmailSection } from '../../_components/update-email-section';
 import { LanguageMenu } from '../../_components/language-menu';
 
 
-const ProfileSettingsPage = async ({ 
-  params: { id } 
-}: { 
-  params: {
-    id: string;
-  }; 
-}) => {
+const ProfileSettingsPage = async () => {
   const user = await getCurrentUser();
 
   return (
