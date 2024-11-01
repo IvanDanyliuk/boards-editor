@@ -281,3 +281,7 @@ export const updateTeamData = async (details: any, prevState: any, formData: For
   await db.update(teams).set({ name }).where(eq(teams.id, id));
   revalidatePath('/', 'layout');
 };
+
+export const updateTeamLogo = async (prevState: any, formData: FormData) => {
+
+};

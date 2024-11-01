@@ -1,9 +1,10 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { fetchTeams } from '@/lib/actions/team.actions';
+import { fetchTeams, updateTeamLogo } from '@/lib/actions/team.actions';
 import { Separator } from '@/components/ui/separator';
 import { getTranslations } from 'next-intl/server';
 import { TeamSettingsForm } from '../../../_components/team-settings-form';
+import { ImageForm } from '../../../_components/image-form';
 
 
 const TeamProfilePage = async ({ params: { id } }: { 
@@ -33,6 +34,13 @@ const TeamProfilePage = async ({ params: { id } }: {
         <div className='flex flex-col flex-1 gap-3'>
           <TeamSettingsForm teamName={currentTeam?.name!} teamId={currentTeam.id} />
         </div>
+        <ImageForm 
+          name={currentTeam.name} 
+          color={currentTeam.teamColor} 
+          imageUrl={currentTeam.teamLogo!} 
+          inputName='teamLogo' 
+          onImageChange={updateTeamLogo} 
+        />
       </div>
     </div>
   );
