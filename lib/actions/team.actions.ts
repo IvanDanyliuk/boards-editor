@@ -274,6 +274,10 @@ export const setCurrentTeam = (teamId: string) => {
   revalidatePath('/', 'layout');
 };
 
-export const updateTeamData = async (prevState: any, formData: FormData) => {
-  const name = formData.get('name');
+export const updateTeamData = async (details: any, prevState: any, formData: FormData) => {
+  const name = formData.get('name') as string;
+  const id = details.teamId;
+
+  await db.update(teams).set({ name }).where(eq(teams.id, id));
+  revalidatePath('/', 'layout');
 };

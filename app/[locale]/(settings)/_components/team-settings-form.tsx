@@ -12,21 +12,22 @@ import { updateTeamData } from '@/lib/actions/team.actions';
 
 interface ITeamSettingsForm {
   teamName: string;
+  teamId: string;
 };
 
 
-export const TeamSettingsForm = ({ teamName }: ITeamSettingsForm) => {
+export const TeamSettingsForm = ({ teamName, teamId }: ITeamSettingsForm) => {
   const t = useTranslations('Settings');
   const ref = useRef<HTMLFormElement>(null);
 
   const [currentTeamName, setCurrentTeamName] = useState<string>(teamName);
-  const [state, formAction] = useFormState<any, any>(updateTeamData, {
+  const [state, formAction] = useFormState<any, any>(updateTeamData.bind(null, { teamId }), {
     name: ''
   });
 
   const handleTeamNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setCurrentTeamName(e.target.value);
-  } 
+  };
 
   useEffect(() => {
     setCurrentTeamName(teamName);
@@ -49,7 +50,6 @@ export const TeamSettingsForm = ({ teamName }: ITeamSettingsForm) => {
       <TextField 
         name='name' 
         label={t('teamSettingsForm.name')} 
-        // defaultValue={teamName} 
         value={currentTeamName}
         onChange={handleTeamNameChange}
       />
