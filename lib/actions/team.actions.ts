@@ -275,5 +275,5 @@ export const setCurrentTeam = (teamId: string) => {
 };
 
 export const updateTeamData = async (prevState: any, formData: FormData) => {
-
+  const name = formData.get('name');
 };

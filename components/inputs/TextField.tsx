@@ -1,3 +1,4 @@
+import { ChangeEvent } from 'react';
 import { Input } from '../ui/input';
 import { Label } from '../ui/label';
 
@@ -8,7 +9,7 @@ interface ITextField {
   type?: string;
   value?: string;
   defaultValue?: string;
-  onChange?: () => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 
