@@ -2,13 +2,20 @@
 
 import { useEffect } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { CircleAlert, Clock, Star } from 'lucide-react';
 import { toast } from 'sonner';
 import { Link } from '@/i18n/routing';
-import { Templates } from '../templates';
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from '@/components/ui/tooltip';
 import { Team } from '@/lib/types';
 import { extractFirstLetters } from '@/lib/helpers';
+import { Templates } from '../templates';
 import { CreateTeamModal } from './create-team-modal';
 import { TeamsMenu } from '../../../../../components/teams-menu';
 
@@ -42,14 +49,31 @@ export const Sidebar = ({ teams }: ISidebar) => {
           {teams.data.map(team => (
             <li 
               key={crypto.randomUUID()} 
-              className='w-10 h-10 flex justify-center items-center rounded-md overflow-hidden hover:opacity-55 transition-opacity duration-100' 
-              style={{ background: team.teamColor }}>
-              <Link 
-                href={`/teams/${team.id}`} 
-                className='w-full h-fit text-center font-semibold'
-              >
-                {extractFirstLetters(team.name)}
-              </Link>
+               className='rounded-md overflow-hidden'
+              style={{ background: team.teamColor }}
+            >
+              <TooltipProvider>
+                <Tooltip>
+                  <TooltipTrigger 
+                    className='w-10 h-10 flex justify-center items-center'
+                  >
+                    <Link 
+                      href={`/teams/${team.id}`} 
+                      className='relative w-full h-full flex justify-center items-center text-center font-semiboldr hover:opacity-55 transition-opacity duration-100'
+                    >
+                      {team.teamLogo ? (
+                          <Image src={team.teamLogo} alt={team.name} fill className='object-cover' />
+                        ) : 
+                        extractFirstLetters(team.name)}
+                    </Link>
+                  </TooltipTrigger>
+                  <TooltipContent side='right'>
+                    <p>{team.name}</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+
+              
             </li>
           ))}
         </ul>
