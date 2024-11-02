@@ -352,23 +352,21 @@ export const updateTeamLogo = async (teamId: string, prevState: any, formData: F
 };
 
 export const removeImageLogo = async (imagePath: string, teamId: string) => {
-  console.log('REMOVE IMAGE LOGO', { imagePath, teamId })
-
   try {
-    // const { message } = await removeImage({
-    //   imagePath,
-    //   bucket: process.env.SUPABASE_STORAGE_BUCKET!
-    // });
+    const { message } = await removeImage({
+      imagePath,
+      bucket: process.env.SUPABASE_STORAGE_BUCKET!
+    });
   
-    // if(message) {
-    //   return {
-    //     error: {
-    //       uploadUserImage: [message],
-    //     },
-    //   };
-    // }
+    if(message) {
+      return {
+        error: {
+          uploadUserImage: [message],
+        },
+      };
+    }
   
-    // await db.update(teams).set({ teamLogo: '' }).where(eq(teams.id, teamId));
+    await db.update(teams).set({ teamLogo: '' }).where(eq(teams.id, teamId));
 
     revalidatePath('/', 'layout');
   } catch (error: any) {
