@@ -1,4 +1,4 @@
-import { getCurrentUser, updateProfilePhoto } from '@/lib/actions/user.actions';
+import { getCurrentUser, removeProfilePhoto, updateProfilePhoto } from '@/lib/actions/user.actions';
 import { ProfileSettingsForm } from '../../_components/profile-settings-form';
 import { ImageForm } from '../../_components/image-form';
 import { UpdatePasswordSection } from '../../_components/update-password-section';
@@ -28,6 +28,7 @@ const ProfileSettingsPage = async () => {
         imageUrl={user.data.user?.user_metadata.imageUrl}
         inputName='profileImage'
         onImageChange={updateProfilePhoto}
+        onImageRemove={removeProfilePhoto}
       />
     </div>
   );

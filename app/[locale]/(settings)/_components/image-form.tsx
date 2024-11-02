@@ -20,7 +20,9 @@ interface IImageForm {
   imageUrl: string;
   label?: string;
   inputName: string;
+  itemId?: string;
   onImageChange: (prevState: any, formData: FormData) => void;
+  onImageRemove: ((imageUrl: string, id?: any) => void);
 };
 
 
@@ -29,15 +31,21 @@ export const ImageForm = ({
   color, 
   imageUrl, 
   inputName, 
-  onImageChange
+  itemId,
+  onImageChange,
+  onImageRemove
 }: IImageForm) => {
   const t = useTranslations('Settings');
   const [state, formAction] = useFormState<any, any>(onImageChange, { imageUrl: '' });
   const initials = name ? extractFirstLetters(name) : 'A';
 
-  const handleRemoveProfilePhoto = async () => {
+  const handleImageRemove = async () => {
     if(imageUrl) {
-      await removeProfilePhoto(imageUrl);
+      if(itemId) {
+        await onImageRemove(imageUrl, itemId);
+      } else {
+        await onImageRemove(imageUrl);
+      }
     };
   }
 
@@ -73,7 +81,7 @@ export const ImageForm = ({
           <Button type='submit' className='flex-1'>
             {t('profileImageForm.uploadBtnLabel')}
           </Button>
-          <Button type='button' onClick={handleRemoveProfilePhoto} className='flex-1'>
+          <Button type='button' onClick={handleImageRemove} className='flex-1'>
             {t('profileImageForm.removeBtnLabel')}
           </Button>
         </div>

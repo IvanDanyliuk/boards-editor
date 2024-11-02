@@ -1,6 +1,6 @@
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
-import { fetchTeams, updateTeamLogo } from '@/lib/actions/team.actions';
+import { fetchTeams, removeImageLogo, updateTeamLogo } from '@/lib/actions/team.actions';
 import { Separator } from '@/components/ui/separator';
 import { getTranslations } from 'next-intl/server';
 import { TeamSettingsForm } from '../../../_components/team-settings-form';
@@ -39,7 +39,9 @@ const TeamProfilePage = async ({ params: { id } }: {
           color={currentTeam.teamColor} 
           imageUrl={currentTeam.teamLogo!} 
           inputName='teamLogo' 
-          onImageChange={updateTeamLogo} 
+          itemId={currentTeam.id}
+          onImageChange={updateTeamLogo.bind(null, currentTeam.id)} 
+          onImageRemove={removeImageLogo}
         />
       </div>
     </div>

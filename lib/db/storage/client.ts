@@ -38,8 +38,6 @@ export async function removeImage({ imagePath, bucket }: RemoveImageProps) {
   const { storage } = createServerClient();
   const imageName = imagePath.slice(imagePath.lastIndexOf('/') + 1);
 
-  console.log('REMOVE IMAGE', { imagePath, imageName })
-
   const { error } = await storage.from(bucket).remove([imageName]);
 
   if(error) {

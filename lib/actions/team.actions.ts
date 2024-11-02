@@ -7,7 +7,7 @@ import db from '../db';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
 import { teams } from '../db/schema';
 import { getRandomHexColor } from '../helpers';
-import { uploadImage } from '../db/storage/client';
+import { removeImage, uploadImage } from '../db/storage/client';
 import { createServerClient } from '../db/clients/server';
 import { redirect } from 'next/navigation';
 import { cookies } from 'next/headers';
@@ -15,7 +15,15 @@ import { cookies } from 'next/headers';
 
 const teamSchema = zod.object({
   name: zod.string().min(1, 'Name is required').max(100),
-  profilePhoto: zod
+  teamLogo: zod
+    .instanceof(File)
+    .optional()
+    .refine(file => !file || file.size !== 0 || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
+    .refine(file => !file || file.type === '' || PROFILE_IMAGE_FILE_TYPES.includes(file.type), 'The image must have one of the following formats: JPEG, PNG, SVG')
+});
+
+const updateTeamLogoSchema = zod.object({
+  teamLogo: zod
     .instanceof(File)
     .optional()
     .refine(file => !file || file.size !== 0 || file.size < PROFILE_IMAGE_MAX_FILE_SIZE, 'File size must be less than 3Mb')
@@ -253,7 +261,7 @@ export const fetchCurrentTeam = async (teamId: string) => {
   try {
     const team = await db.query.teams.findFirst({
       where: (teams, { eq }) => eq(teams.id, teamId)
-    })
+    });
 
     return {
       data: team,
@@ -282,6 +290,92 @@ export const updateTeamData = async (details: any, prevState: any, formData: For
   revalidatePath('/', 'layout');
 };
 
-export const updateTeamLogo = async (prevState: any, formData: FormData) => {
+export const updateTeamLogo = async (teamId: string, prevState: any, formData: FormData) => {
+  try {
+    const newTeamLogo = formData.get('teamLogo') as any;
 
+    const validatedFields = updateTeamLogoSchema.safeParse({
+      teamLogo: newTeamLogo
+    });
+
+    if (!validatedFields.success) {
+      return {
+        error: validatedFields.error.flatten().fieldErrors,
+      };
+    };
+
+    const currentTeam = await db.query.teams.findFirst({
+      where: (teams, { eq }) => eq(teams.id, teamId)
+    });
+    const currentTeamLogoUrl = currentTeam && currentTeam.teamLogo ? currentTeam.teamLogo : '';
+
+    const { imageUrl, message } = await uploadImage({
+      file: newTeamLogo,
+      bucket: process.env.SUPABASE_STORAGE_BUCKET!,
+    });
+
+    if(message) {
+      return {
+        error: {
+          uploadTeamLogo: [message]
+        }
+      };
+    }
+
+    await db.update(teams).set({ teamLogo: imageUrl }).where(eq(teams.id, teamId));
+
+    if(imageUrl) {
+      const { message } = await removeImage({
+        imagePath: currentTeamLogoUrl,
+        bucket: process.env.SUPABASE_STORAGE_BUCKET!
+      });
+
+      if(message) {
+        return {
+          error: {
+            uploadUserImage: [message],
+          },
+        };
+      }
+    }
+
+    revalidatePath('/', 'layout');
+  } catch (error: any) {
+    if (error) {
+      return {
+        error: {
+          uploadUserImage: [error.message],
+        },
+      };
+    }
+  }
+};
+
+export const removeImageLogo = async (imagePath: string, teamId: string) => {
+  console.log('REMOVE IMAGE LOGO', { imagePath, teamId })
+
+  try {
+    // const { message } = await removeImage({
+    //   imagePath,
+    //   bucket: process.env.SUPABASE_STORAGE_BUCKET!
+    // });
+  
+    // if(message) {
+    //   return {
+    //     error: {
+    //       uploadUserImage: [message],
+    //     },
+    //   };
+    // }
+  
+    // await db.update(teams).set({ teamLogo: '' }).where(eq(teams.id, teamId));
+
+    revalidatePath('/', 'layout');
+  } catch (error: any) {
+    return {
+      error: {
+        uploadUserImage: [error.message],
+      },
+    };
+  }
 };
