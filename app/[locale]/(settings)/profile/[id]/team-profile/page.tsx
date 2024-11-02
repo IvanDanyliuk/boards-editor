@@ -5,6 +5,7 @@ import { Separator } from '@/components/ui/separator';
 import { getTranslations } from 'next-intl/server';
 import { TeamSettingsForm } from '../../../_components/team-settings-form';
 import { ImageForm } from '../../../_components/image-form';
+import { DeleteTeamControl } from '../../../_components/delete-team-control';
 
 
 const TeamProfilePage = async ({ params: { id } }: { 
@@ -32,7 +33,14 @@ const TeamProfilePage = async ({ params: { id } }: {
       <Separator />
       <div className='pt-3 flex flex-col md:flex-row gap-3 md:gap-8'>
         <div className='flex flex-col flex-1 gap-3'>
-          <TeamSettingsForm teamName={currentTeam?.name!} teamId={currentTeam.id} />
+          <TeamSettingsForm 
+            teamName={currentTeam?.name!} 
+            teamId={currentTeam.id} 
+          />
+          <DeleteTeamControl 
+            teamId={currentTeam.id} 
+            userId={id} 
+          />
         </div>
         <ImageForm 
           name={currentTeam.name} 
