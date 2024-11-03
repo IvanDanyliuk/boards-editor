@@ -115,6 +115,7 @@
       "formLabel": "Мова"
     },
     "deleteTeamControl": {
+      "triggerBtn": "Видалити команду",
       "confirmationMessage1": "Ви дійсно впевнені, що хочете видалити цю команду?",
       "confirmationMessage2": "Ця дія не може бути відмінена. Це видалить цю команду та її дані на наших серверах.",
       "submitBtn": "Так",

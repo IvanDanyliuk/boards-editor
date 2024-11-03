@@ -115,6 +115,7 @@
       "formLabel": "Język"
     },
     "deleteTeamControl": {
+      "triggerBtn": "Usuń zespół",
       "confirmationMessage1": "Czy jesteś absolutnie pewien, że chcesz usunąć ten zespół?",
       "confirmationMessage2": "Tej czynności nie można cofnąć. Spowoduje to trwałe usunięcie tego zespołu i usunięcie danych z naszych serwerów.",
       "submitBtn": "Tak",

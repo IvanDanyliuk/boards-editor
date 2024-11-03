@@ -377,3 +377,9 @@ export const removeImageLogo = async (imagePath: string, teamId: string) => {
     };
   }
 };
+
+export const deleteTeam = async (teamId: string, userId: string) => {
+  console.log('DELETE TEAM', { teamId, userId });
+
+  revalidatePath('/', 'layout');
+};
