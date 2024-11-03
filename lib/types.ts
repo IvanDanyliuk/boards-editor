@@ -13,3 +13,7 @@ export type Team = {
   projectIds: string[];
   createdAt: Date;
 };
+
+export type User = {
+  
+}

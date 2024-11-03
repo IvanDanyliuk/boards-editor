@@ -251,7 +251,7 @@ export const fetchTeams = async (userId: string) => {
     return {
       data: null,
       error: {
-        fetchTeams: [error.message],
+        message: [error.message],
       },
     };
   }
@@ -263,6 +263,8 @@ export const fetchCurrentTeam = async (teamId: string) => {
       where: (teams, { eq }) => eq(teams.id, teamId)
     });
 
+    console.log('FETCH CURRENT TEAM', team)
+
     return {
       data: team,
       error: null,
@@ -271,7 +273,7 @@ export const fetchCurrentTeam = async (teamId: string) => {
     return {
       data: null,
       error: {
-        fetchCurrenTeam: [error.message],
+        message: [error.message],
       },
     };
   }
