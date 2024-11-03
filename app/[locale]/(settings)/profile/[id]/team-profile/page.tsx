@@ -32,7 +32,7 @@ const TeamProfilePage = async ({ params: { id } }: {
       </h1>
       <Separator />
       <div className='pt-3 flex flex-col md:flex-row gap-3 md:gap-8'>
-        <div className='flex flex-col flex-1 gap-3'>
+        <div className='flex flex-col flex-1 gap-6'>
           <TeamSettingsForm 
             teamName={currentTeam?.name!} 
             teamId={currentTeam.id} 

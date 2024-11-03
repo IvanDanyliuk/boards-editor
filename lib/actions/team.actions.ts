@@ -379,7 +379,41 @@ export const removeImageLogo = async (imagePath: string, teamId: string) => {
 };
 
 export const deleteTeam = async (teamId: string, userId: string) => {
-  console.log('DELETE TEAM', { teamId, userId });
+  try {
+    const teamData = await db.query.teams.findFirst({ where: (teams, { eq }) => eq(teams.id, teamId) });
 
-  revalidatePath('/', 'layout');
+    if(teamData) {
+      if(teamData.admin === userId) {
+        await db.delete(teams).where(eq(teams.id, teamId));
+
+        const userTeams = await db.select().from(teams).where(eq(teams.memberIds, [userId]));
+        if(userTeams.length > 0) {
+          cookies().set('currentTeam', userTeams[0].id);
+        }
+
+        if(teamData.teamLogo) {
+          const { message } = await removeImage({
+            imagePath: teamData.teamLogo,
+            bucket: process.env.SUPABASE_STORAGE_BUCKET!
+          });
+        
+          if(message) {
+            throw new Error(message);
+          }
+        }
+      } else {
+        throw new Error(`Failed to delete the team. User is not an admin of this team!`)
+      }
+    } else {
+      throw new Error('Team not found');
+    }
+
+    revalidatePath('/', 'layout');
+  } catch (error: any) {
+    return {
+      error: {
+        deleteTeam: [error.message],
+      },
+    };
+  }
 };

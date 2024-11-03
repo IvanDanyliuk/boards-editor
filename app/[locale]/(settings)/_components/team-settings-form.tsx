@@ -43,7 +43,7 @@ export const TeamSettingsForm = ({ teamName, teamId }: ITeamSettingsForm) => {
     <form 
       ref={ref} 
       action={formAction} 
-      className='flex flex-1 flex-col gap-3'
+      className='flex flex-col gap-3'
     >
       <TextField 
         name='name' 
