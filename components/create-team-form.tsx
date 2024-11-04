@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { useFormState } from 'react-dom';
 import { CircleAlert } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { toast } from 'sonner';
 import { FileInput } from '@/components/inputs/FileInput';
 import { TextField } from '@/components/inputs/TextField';
@@ -17,6 +18,7 @@ const initialState = {
 
 
 export const CreateTeamForm = () => {
+  const t = useTranslations('CreateTeam');
   const [state, formAction] = useFormState<any, any>(createTeam, initialState);
 
   useEffect(() => {
@@ -35,14 +37,14 @@ export const CreateTeamForm = () => {
     >
       <TextField 
         name='name' 
-        label='Team name' 
+        label={t('teamName')} 
       />
       <FileInput 
         name='teamLogo' 
-        label='Team logo' 
+        label={t('teamLogo')} 
       />
       <Button type='submit'>
-        Create
+        {t('createBtn')}
       </Button>
     </form>
   );

@@ -48,6 +48,13 @@
       "logoutBtnLabel": "Вийти"
     }
   },
+  "CreateTeam": {
+    "pageTitle": "Створіть вашу першу команду",
+    "modalTitle": "Створити команду",
+    "teamName": "Назва команди",
+    "teamLogo": "Логотип команди",
+    "createBtn": "Створити"
+  },
   "Dashboard": {
     "sidebar": {
       "recentBoards": "Останні дошки",

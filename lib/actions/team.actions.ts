@@ -263,6 +263,9 @@ export const fetchCurrentTeam = async (teamId: string) => {
       where: (teams, { eq }) => eq(teams.id, teamId)
     });
 
+    const supabase = createServerClient();
+    const teamMembers = await supabase.auth.admin.listUsers()
+
     console.log('FETCH CURRENT TEAM', team)
 
     return {

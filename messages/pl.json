@@ -48,6 +48,13 @@
       "logoutBtnLabel": "Wyloguj się"
     }
   },
+  "CreateTeam": {
+    "pageTitle": "Utwórz swój pierwszy zespół",
+    "modalTitle": "Utwórz zespół",
+    "teamName": "Nazwa zespołu",
+    "teamLogo": "Logo zespołu",
+    "createBtn": "Utwórz"
+  },
   "Dashboard": {
     "sidebar": {
       "recentBoards": "Ostatnie tablice",

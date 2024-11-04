@@ -1,3 +1,4 @@
+import { useTranslations } from 'next-intl';
 import { CreateTeamForm } from '@/components/create-team-form';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,6 +11,8 @@ import {
 
 
 export const CreateTeamModal = () => {
+  const t = useTranslations('CreateTeam');
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -22,7 +25,9 @@ export const CreateTeamModal = () => {
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
-          <DialogTitle>Create a team</DialogTitle>
+          <DialogTitle>
+            {t('modalTitle')}
+          </DialogTitle>
         </DialogHeader>
         <CreateTeamForm />
       </DialogContent>

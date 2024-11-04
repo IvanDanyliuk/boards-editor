@@ -48,6 +48,13 @@
       "logoutBtnLabel": "Log out"
     }
   },
+  "CreateTeam": {
+    "pageTitle": "Create your first team",
+    "modalTitle": "Create a team",
+    "teamName": "Team name",
+    "teamLogo": "Team logo",
+    "createBtn": "Create"
+  },
   "Dashboard": {
     "sidebar": {
       "recentBoards": "Recent boards",
