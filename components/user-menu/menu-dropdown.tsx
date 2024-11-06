@@ -45,7 +45,7 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel className='mb-3 flex items-center gap-3'>
-        {user.user_metadata.imageUrl ? 
+          {user.user_metadata.imageUrl ? 
             <div className='relative w-10 h-10 overflow-hidden rounded-full'>
               <Image 
                 src={user.user_metadata.imageUrl} 
