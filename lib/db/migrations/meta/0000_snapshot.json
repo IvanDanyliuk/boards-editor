@@ -1,5 +1,5 @@
 {
-  "id": "7a5b525b-8d62-455e-8d69-303b8a99948e",
+  "id": "59a70c99-2b18-46df-a323-7d186713f291",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -50,12 +50,6 @@
           "primaryKey": false,
           "notNull": false
         },
-        "teams": {
-          "name": "teams",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
         "created_at": {
           "name": "created_at",
           "type": "timestamp",
@@ -79,22 +73,66 @@
           ],
           "onDelete": "no action",
           "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.profiles_categories": {
+      "name": "profiles_categories",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
         },
-        "profiles_teams_teams_id_fk": {
-          "name": "profiles_teams_teams_id_fk",
-          "tableFrom": "profiles",
-          "tableTo": "teams",
+        "team_id": {
+          "name": "team_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "profiles_categories_user_id_profiles_id_fk": {
+          "name": "profiles_categories_user_id_profiles_id_fk",
+          "tableFrom": "profiles_categories",
+          "tableTo": "profiles",
           "columnsFrom": [
-            "teams"
+            "user_id"
           ],
           "columnsTo": [
             "id"
           ],
-          "onDelete": "cascade",
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "profiles_categories_team_id_teams_id_fk": {
+          "name": "profiles_categories_team_id_teams_id_fk",
+          "tableFrom": "profiles_categories",
+          "tableTo": "teams",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {},
+      "compositePrimaryKeys": {
+        "profiles_categories_team_id_user_id_pk": {
+          "name": "profiles_categories_team_id_user_id_pk",
+          "columns": [
+            "team_id",
+            "user_id"
+          ]
+        }
+      },
       "uniqueConstraints": {}
     },
     "public.teams": {
@@ -131,12 +169,6 @@
           "primaryKey": false,
           "notNull": true
         },
-        "member_ids": {
-          "name": "member_ids",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
         "project_ids": {
           "name": "project_ids",
           "type": "text[]",
@@ -152,21 +184,7 @@
         }
       },
       "indexes": {},
-      "foreignKeys": {
-        "teams_member_ids_profiles_id_fk": {
-          "name": "teams_member_ids_profiles_id_fk",
-          "tableFrom": "teams",
-          "tableTo": "profiles",
-          "columnsFrom": [
-            "member_ids"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
         "teams_name_unique": {
