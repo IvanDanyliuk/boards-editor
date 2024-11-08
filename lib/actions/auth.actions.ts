@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
-import { headers } from 'next/headers';
+import { cookies, headers } from 'next/headers';
 import { z as zod } from 'zod';
 import { createServerClient } from '../db/clients/server';
 import { PROFILE_IMAGE_FILE_TYPES, PROFILE_IMAGE_MAX_FILE_SIZE } from '../constants';
@@ -60,7 +60,7 @@ export const login = async (prevState: any, formData: FormData) => {
   };
 
   const supabase = createServerClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password })
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password })
 
   if (error) {
     return {
@@ -68,6 +68,14 @@ export const login = async (prevState: any, formData: FormData) => {
         credentials: [error?.message!],
       },
     }
+  }
+
+  cookies().set('user', email);
+
+  const userTeams = data.user.user_metadata.teams;
+  if(userTeams.length > 0) {
+    const currentTeamId = userTeams[0];
+    cookies().set('currentTeam', currentTeamId);
   }
 
   revalidatePath('/', 'layout');
@@ -115,7 +123,6 @@ export const register = async (prevState: any, formData: FormData) => {
     password: password as string,
     options: {
       data: {
-        id: crypto.randomUUID(),
         name,
         imageUrl: profileImage ? profileImage?.imageUrl : '',
         company,
@@ -138,7 +145,7 @@ export const register = async (prevState: any, formData: FormData) => {
   }
 
   revalidatePath('/', 'layout');
-  redirect('/');
+  redirect('/create-team');
 };
 
 export const logout = async () => {
@@ -152,6 +159,13 @@ export const logout = async () => {
       },
     };
   }
+
+  const currentTeamCookie = cookies().get('currentTeam');
+  if(currentTeamCookie) {
+    cookies().delete('currentTeam');
+  }
+
+  cookies().delete('user');
 
   revalidatePath('/login', 'layout');
   redirect('/login');

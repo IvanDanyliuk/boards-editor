@@ -1,9 +1,140 @@
 {
-  "id": "15520e14-cc84-46eb-a883-bb983c23fc79",
+  "id": "59a70c99-2b18-46df-a323-7d186713f291",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
   "tables": {
+    "public.profiles": {
+      "name": "profiles",
+      "schema": "",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "primaryKey": true,
+          "notNull": true
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "image_url": {
+          "name": "image_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "user_color": {
+          "name": "user_color",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "company": {
+          "name": "company",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "role": {
+          "name": "role",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "industry": {
+          "name": "industry",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "timestamp",
+          "primaryKey": false,
+          "notNull": true,
+          "default": "now()"
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "profiles_id_users_id_fk": {
+          "name": "profiles_id_users_id_fk",
+          "tableFrom": "profiles",
+          "tableTo": "users",
+          "schemaTo": "auth",
+          "columnsFrom": [
+            "id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "public.profiles_categories": {
+      "name": "profiles_categories",
+      "schema": "",
+      "columns": {
+        "user_id": {
+          "name": "user_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "team_id": {
+          "name": "team_id",
+          "type": "uuid",
+          "primaryKey": false,
+          "notNull": true
+        }
+      },
+      "indexes": {},
+      "foreignKeys": {
+        "profiles_categories_user_id_profiles_id_fk": {
+          "name": "profiles_categories_user_id_profiles_id_fk",
+          "tableFrom": "profiles_categories",
+          "tableTo": "profiles",
+          "columnsFrom": [
+            "user_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        },
+        "profiles_categories_team_id_teams_id_fk": {
+          "name": "profiles_categories_team_id_teams_id_fk",
+          "tableFrom": "profiles_categories",
+          "tableTo": "teams",
+          "columnsFrom": [
+            "team_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "no action",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {
+        "profiles_categories_team_id_user_id_pk": {
+          "name": "profiles_categories_team_id_user_id_pk",
+          "columns": [
+            "team_id",
+            "user_id"
+          ]
+        }
+      },
+      "uniqueConstraints": {}
+    },
     "public.teams": {
       "name": "teams",
       "schema": "",
@@ -26,90 +157,21 @@
           "primaryKey": false,
           "notNull": false
         },
-        "user_ids": {
-          "name": "user_ids",
-          "type": "uuid",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "timestamp",
-          "primaryKey": false,
-          "notNull": true,
-          "default": "now()"
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {
-        "teams_user_ids_users_id_fk": {
-          "name": "teams_user_ids_users_id_fk",
-          "tableFrom": "teams",
-          "tableTo": "users",
-          "columnsFrom": [
-            "user_ids"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {
-        "teams_name_unique": {
-          "name": "teams_name_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
-        }
-      }
-    },
-    "public.users": {
-      "name": "users",
-      "schema": "",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "uuid",
-          "primaryKey": true,
-          "notNull": true
-        },
-        "name": {
-          "name": "name",
+        "team_color": {
+          "name": "team_color",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "email": {
-          "name": "email",
+        "admin": {
+          "name": "admin",
           "type": "text",
           "primaryKey": false,
           "notNull": true
         },
-        "image_url": {
-          "name": "image_url",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "role": {
-          "name": "role",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true
-        },
-        "company": {
-          "name": "company",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
-        },
-        "industry": {
-          "name": "industry",
-          "type": "text",
+        "project_ids": {
+          "name": "project_ids",
+          "type": "text[]",
           "primaryKey": false,
           "notNull": true
         },
@@ -125,18 +187,11 @@
       "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {
-        "users_name_unique": {
-          "name": "users_name_unique",
+        "teams_name_unique": {
+          "name": "teams_name_unique",
           "nullsNotDistinct": false,
           "columns": [
             "name"
-          ]
-        },
-        "users_email_unique": {
-          "name": "users_email_unique",
-          "nullsNotDistinct": false,
-          "columns": [
-            "email"
           ]
         }
       }

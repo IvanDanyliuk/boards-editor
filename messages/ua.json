@@ -48,6 +48,13 @@
       "logoutBtnLabel": "Вийти"
     }
   },
+  "CreateTeam": {
+    "pageTitle": "Створіть вашу першу команду",
+    "modalTitle": "Створити команду",
+    "teamName": "Назва команди",
+    "teamLogo": "Логотип команди",
+    "createBtn": "Створити"
+  },
   "Dashboard": {
     "sidebar": {
       "recentBoards": "Останні дошки",
@@ -95,8 +102,12 @@
       "formLabel": "Пароль",
       "actionBtnLabel": "Оновити"
     },
+    "teamSettingsForm": {
+      "name": "Ім'я",
+      "submitBtnLabel": "Підтвердити"
+    },
     "teamProfile": {
-
+      "title": "Профіль команди"
     },
     "teamUsers": {
 
@@ -109,6 +120,15 @@
     },
     "languageMenu": {
       "formLabel": "Мова"
+    },
+    "deleteTeamControl": {
+      "title1": "Видалити команду",
+      "title2": "Видалення цієї команди повністю видалить всі її дошки та виключить зі складу всіх користувачів",
+      "triggerBtn": "Видалити команду",
+      "confirmationMessage1": "Ви дійсно впевнені, що хочете видалити цю команду?",
+      "confirmationMessage2": "Ця дія не може бути відмінена. Це видалить цю команду та її дані на наших серверах.",
+      "submitBtn": "Так",
+      "cancelBtn": "Ні"
     }
   }
 }

@@ -1,14 +1,18 @@
 import { useTranslations } from 'next-intl';
 import { History, PanelsLeftBottom, Users } from 'lucide-react';
 import { Link } from '@/i18n/routing';
+import { Separator } from '@/components/ui/separator';
+import { TeamsMenu } from '@/components/teams-menu';
+import { Team } from '@/lib/types';
 
 
 interface ISettingsMenu {
   userId: string;
+  teams: Team[];
 };
 
 
-export const SettingsMenu = ({ userId }: ISettingsMenu) => {
+export const SettingsMenu = ({ userId, teams }: ISettingsMenu) => {
   const t = useTranslations('Settings');
   
   const links = [
@@ -31,8 +35,8 @@ export const SettingsMenu = ({ userId }: ISettingsMenu) => {
   
   return (
     <div className='p-3 h-fit flex flex-col gap-3 rounded-md bg-white'>
-      <div>Team Menu</div>
-      <div className='w-full h-[1px] bg-page-bg' />
+      <TeamsMenu teams={teams} />
+      <Separator />
       {links.map(link => (
         <Link 
           key={crypto.randomUUID()} 

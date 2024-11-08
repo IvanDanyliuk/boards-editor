@@ -1,18 +1,12 @@
-import { getCurrentUser } from '@/lib/actions/user.actions';
+import { getCurrentUser, removeProfilePhoto, updateProfilePhoto } from '@/lib/actions/user.actions';
 import { ProfileSettingsForm } from '../../_components/profile-settings-form';
-import { ProfileImageForm } from '../../_components/profile-image-form';
+import { ImageForm } from '../../_components/image-form';
 import { UpdatePasswordSection } from '../../_components/update-password-section';
 import { UpdateEmailSection } from '../../_components/update-email-section';
 import { LanguageMenu } from '../../_components/language-menu';
 
 
-const ProfileSettingsPage = async ({ 
-  params: { id } 
-}: { 
-  params: {
-    id: string;
-  }; 
-}) => {
+const ProfileSettingsPage = async () => {
   const user = await getCurrentUser();
 
   return (
@@ -28,10 +22,13 @@ const ProfileSettingsPage = async ({
         <UpdateEmailSection />
         <LanguageMenu />
       </div>
-      <ProfileImageForm 
-        userName={user.data.user?.user_metadata.name} 
-        userColor={user.data.user?.user_metadata.userColor} 
-        userImageUrl={user.data.user?.user_metadata.imageUrl}
+      <ImageForm 
+        name={user.data.user?.user_metadata.name} 
+        color={user.data.user?.user_metadata.userColor} 
+        imageUrl={user.data.user?.user_metadata.imageUrl}
+        inputName='profileImage'
+        onImageChange={updateProfilePhoto}
+        onImageRemove={removeProfilePhoto}
       />
     </div>
   );

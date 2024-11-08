@@ -26,13 +26,14 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
       <DropdownMenuTrigger className='flex items-center'>
         <div>
           {user.user_metadata.imageUrl ? 
-            <Image 
-              src={user.user_metadata.imageUrl} 
-              alt='Profile image' 
-              width={50} 
-              height={50} 
-              className='rounded-full' 
-            /> : 
+            <div className='relative w-10 h-10 overflow-hidden rounded-full'>
+              <Image 
+                src={user.user_metadata.imageUrl} 
+                alt='Profile image' 
+                fill 
+                className='object-cover' 
+              />
+            </div> : 
             <div 
               className='w-[50px] h-[50px] flex justify-center items-center rounded-full font-semibold text-white' 
               style={{ background: user.user_metadata.userColor }}
@@ -44,16 +45,17 @@ export const MenuDropdown = ({ user }: IMenuDropdown) => {
       </DropdownMenuTrigger>
       <DropdownMenuContent>
         <DropdownMenuLabel className='mb-3 flex items-center gap-3'>
-        {user.user_metadata.imageUrl ? 
-            <Image 
-              src={user.user_metadata.imageUrl} 
-              alt='Profile image' 
-              width={50} 
-              height={50} 
-              className='rounded-full' 
-            /> : 
+          {user.user_metadata.imageUrl ? 
+            <div className='relative w-10 h-10 overflow-hidden rounded-full'>
+              <Image 
+                src={user.user_metadata.imageUrl} 
+                alt='Profile image' 
+                fill 
+                className='w-full h-full object-cover'
+              />
+            </div> : 
             <div 
-              className='w-[50px] h-[50px] flex justify-center items-center rounded-full font-semibold text-white' 
+              className='w-10 h-10 flex justify-center items-center rounded-full font-semibold text-white' 
               style={{ background: user.user_metadata.userColor }}
             >
               {extractFirstLetters(user.user_metadata.name)}

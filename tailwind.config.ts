@@ -56,8 +56,8 @@ const config = {
         "secondary-bg": "#263868",
         "page-bg": "#F8F8F8",
         "primary-text": "#000000",
-        "secondary-text": "#A8A8A8"
-
+        "secondary-text": "#A8A8A8",
+        "create-btn": "#3A6585",
       },
       borderRadius: {
         lg: "var(--radius)",

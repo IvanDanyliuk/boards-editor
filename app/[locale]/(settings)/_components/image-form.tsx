@@ -14,25 +14,38 @@ import { Label } from '@/components/ui/label';
 
 
 
-interface IProfileImageForm {
-  userName: string;
-  userColor: string;
-  userImageUrl: string;
+interface IImageForm {
+  name: string;
+  color: string;
+  imageUrl: string;
+  label?: string;
+  inputName: string;
+  itemId?: string;
+  onImageChange: (prevState: any, formData: FormData) => void;
+  onImageRemove: ((imageUrl: string, id?: any) => void);
 };
 
 
-export const ProfileImageForm = ({ 
-  userName, 
-  userColor, 
-  userImageUrl 
-}: IProfileImageForm) => {
+export const ImageForm = ({ 
+  name, 
+  color, 
+  imageUrl, 
+  inputName, 
+  itemId,
+  onImageChange,
+  onImageRemove
+}: IImageForm) => {
   const t = useTranslations('Settings');
-  const [state, formAction] = useFormState<any, any>(updateProfilePhoto, { imageUrl: '' });
-  const initials = userName ? extractFirstLetters(userName) : 'A';
+  const [state, formAction] = useFormState<any, any>(onImageChange, { imageUrl: '' });
+  const initials = name ? extractFirstLetters(name) : 'A';
 
-  const handleRemoveProfilePhoto = async () => {
-    if(userImageUrl) {
-      await removeProfilePhoto(userImageUrl);
+  const handleImageRemove = async () => {
+    if(imageUrl) {
+      if(itemId) {
+        await onImageRemove(imageUrl, itemId);
+      } else {
+        await onImageRemove(imageUrl);
+      }
     };
   }
 
@@ -50,25 +63,25 @@ export const ProfileImageForm = ({
       <Label htmlFor='imageUrl'>
         {t('profileImageForm.formLabel')}
       </Label>
-      {userImageUrl ? (
+      {imageUrl ? (
         <div className='relative w-[300px] h-[300px] overflow-hidden rounded-md'>
-          <Image src={userImageUrl} alt={userName} fill className='object-fill' />
+          <Image src={imageUrl} alt={name} fill className='object-fill' />
         </div>
       ) : (
         <div 
           className='w-52 h-52 flex justify-center items-center rounded-md text-6xl text-white font-semibold' 
-          style={{ background: userColor }}
+          style={{ background: color }}
         >
           {initials}
         </div>
       )}
       <form action={formAction} className=''>
-        <FileInput name='profileImage' />
+        <FileInput name={inputName} />
         <div className='mt-3 w-full flex gap-3'>
           <Button type='submit' className='flex-1'>
             {t('profileImageForm.uploadBtnLabel')}
           </Button>
-          <Button type='button' onClick={handleRemoveProfilePhoto} className='flex-1'>
+          <Button type='button' onClick={handleImageRemove} className='flex-1'>
             {t('profileImageForm.removeBtnLabel')}
           </Button>
         </div>

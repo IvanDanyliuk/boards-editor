@@ -48,6 +48,13 @@
       "logoutBtnLabel": "Wyloguj się"
     }
   },
+  "CreateTeam": {
+    "pageTitle": "Utwórz swój pierwszy zespół",
+    "modalTitle": "Utwórz zespół",
+    "teamName": "Nazwa zespołu",
+    "teamLogo": "Logo zespołu",
+    "createBtn": "Utwórz"
+  },
   "Dashboard": {
     "sidebar": {
       "recentBoards": "Ostatnie tablice",
@@ -95,8 +102,12 @@
       "formLabel": "Hasło",
       "actionBtnLabel": "Aktualizacja"
     },
+    "teamSettingsForm": {
+      "name": "Nazwa",
+      "submitBtnLabel": "Potwierdź"
+    },
     "teamProfile": {
-
+      "title": "Profil zespołu"
     },
     "teamUsers": {
 
@@ -109,6 +120,15 @@
     },
     "languageMenu": {
       "formLabel": "Język"
+    },
+    "deleteTeamControl": {
+      "title1": "Usuń zespół",
+      "title2": "Usunięcie zespołu spowoduje nieodwracalne usunięcie wszystkich tablic i rozwiązanie użytkowników.",
+      "triggerBtn": "Usuń zespół",
+      "confirmationMessage1": "Czy jesteś absolutnie pewien, że chcesz usunąć ten zespół?",
+      "confirmationMessage2": "Tej czynności nie można cofnąć. Spowoduje to trwałe usunięcie tego zespołu i usunięcie danych z naszych serwerów.",
+      "submitBtn": "Tak",
+      "cancelBtn": "Nie"
     }
   }
 }
